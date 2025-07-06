@@ -1,0 +1,120 @@
+.contact-section {
+  padding: 4rem 1rem;
+  background: #e6fdf4; /* light green background */
+  color: #333;
+  text-align: center;
+  animation: fadeInUp 1s ease-in;
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #0b7c7c;
+}
+
+.sub-text {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-in forwards;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  text-align: left;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info h3 {
+  margin-bottom: 1rem;
+  color: #0b7c7c;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.contact-info a {
+  color: #0b7c7c;
+  text-decoration: none;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box; /* ← ADD THIS */
+  resize: none;           /* ← ADD THIS to prevent overflow */
+  max-width: 100%;        /* ← ENSURE it never exceeds the form */
+}
+
+
+.contact-form button {
+  background: #0b7c7c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #095f5f;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .contact-info,
+  .contact-form {
+    max-width: 100%;
+  }
+}

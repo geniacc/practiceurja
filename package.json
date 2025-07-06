@@ -1,0 +1,26 @@
+{
+  "name": "urja-mobility-final",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://geniacc.github.io/urja-mobility-final",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.22.3",
+    "react-router-hash-link": "^2.4.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
+    "gh-pages": "^6.3.0",
+    "vite": "^7.0.0",
+    "vite-plugin-static-copy": "^3.1.0"
+  }
+}
