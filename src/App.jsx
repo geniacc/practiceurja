@@ -1,7 +1,11 @@
 // src/App.jsx
 import { useEffect } from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  HashRouter as Router, // ✅ Use HashRouter instead of BrowserRouter
+  Routes,
+  Route,
+  useLocation
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,7 +21,7 @@ import StaffLoan from "./components/StaffLoan";
 import TermsConditions from "./components/TermsConditions";
 import FranchiseForm from "./components/FranchiseForm";
 
-// You can keep this if you still want to auto-scroll on BACK/FORWARD navigation
+// Handle hash-based scroll
 function ScrollToHash() {
   const location = useLocation();
 

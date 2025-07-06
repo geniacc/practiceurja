@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://geniacc.github.io/practiceurja",
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",

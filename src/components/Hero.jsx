@@ -1,7 +1,7 @@
-// src/components/Hero.jsx
 import React from "react";
+import { HashLink } from "react-router-hash-link";
 import "./Hero.css";
-import heroBg from "../assets/hero-bg.jpg"; // Ensure image is correct
+import heroBg from "../assets/hero-bg.jpg";
 
 export default function Hero() {
   return (
@@ -10,7 +10,9 @@ export default function Hero() {
       <div className="hero-content animate-fade-in">
         <h1>Powering a <span>Sustainable Future</span></h1>
         <p>Revolutionizing mobility with clean, efficient energy solutions.</p>
-        <a href="#about" className="hero-btn">Learn More</a>
+        <HashLink smooth to="/#about" className="hero-btn">
+          Learn More
+        </HashLink>
       </div>
     </section>
   );

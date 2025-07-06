@@ -2,3 +2,6 @@ section {
   padding: 60px 20px;
   text-align: center;
 }
+#about {
+  scroll-margin-top: 100px; /* adjust to your navbar height */
+}
