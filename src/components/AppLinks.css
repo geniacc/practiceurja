@@ -1,0 +1,34 @@
+.app-links-section {
+  text-align: center;
+  background: #f5f5f5;
+  padding: 50px 20px;
+  border-top: 2px solid #ff6600;
+  border-bottom: 2px solid #ff6600;
+}
+
+.app-links-section h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.app-links-section p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.app-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.app-links img {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.app-links img:hover {
+  transform: scale(1.05);
+}

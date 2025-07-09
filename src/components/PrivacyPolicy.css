@@ -1,18 +1,24 @@
 .privacy-policy-container {
   max-width: 800px;
   margin: 100px auto 40px;
-  padding: 20px;
+  padding: 30px;
   min-height: 60vh;
+  background-color: #f9f9f9; /* light grey background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
 }
 
 .privacy-policy-container h1 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #222;
+  color: #ff8c00; /* orange headline */
 }
 
 .privacy-policy-container p {
-  line-height: 1.6;
-  color: #444;
+  line-height: 1.7;
+  font-size: 15px;
+  color: #555; /* softer grey for body text */
   margin-bottom: 15px;
 }

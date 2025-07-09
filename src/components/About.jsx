@@ -1,12 +1,16 @@
+// src/components/About.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Add this
 import "./About.css";
 
 export default function About() {
+  const navigate = useNavigate(); // ✅ Initialize navigation
+
   return (
     <section id="about" className="about-section">
       <h2>About Us</h2>
       <p className="intro-text">
-        Urja Mobility is transforming electric mobility by making it more affordable and accessible. We specialize in providing battery leasing solutions for 2-wheeler and 3-wheeler electric vehicles. 
+        Urja Mobility is transforming electric mobility by making it more affordable and accessible. We specialize in providing battery leasing solutions for 2-wheeler and 3-wheeler electric vehicles.
         Batteries account for nearly 50% of the total cost of an electric vehicle. By choosing Urja Mobility, customers avoid the high upfront investment required to purchase a battery. We offer a flexible leasing model with affordable monthly EMIs, so you can enjoy the benefits of electric mobility without the burden of heavy capital expenditure.
       </p>
 
@@ -18,7 +22,16 @@ export default function About() {
             <li>Provide battery swapping and charging infrastructure.</li>
             <li>Enable smart, affordable mobility solutions across urban and rural areas.</li>
             <li>Promote clean energy adoption through accessible EV solutions.</li>
+            <li>Encourage carbon footprint reduction through clean, efficient electric mobility.</li>
           </ul>
+
+          {/* ✅ Use navigate instead of window.location.href */}
+          <button
+            className="carbon-btn"
+            onClick={() => navigate("/carbon-savings")}
+          >
+            Know more about Carbon Saving
+          </button>
         </div>
 
         <div className="about-box">
@@ -32,7 +45,6 @@ export default function About() {
           </ul>
         </div>
 
-        {/* ✅ Modern, compact difference card */}
         <div className="about-box comparison-box">
           <h3>Leasing vs. Financing</h3>
           <div className="comparison-grid">

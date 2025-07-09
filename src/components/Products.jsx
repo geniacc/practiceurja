@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // ✅ For leasing button navigation
 import "./Products.css";
 import batteryImg from "../assets/battery-product.jpg";
 import l2Img from "../assets/l2.jpg";
@@ -31,7 +32,6 @@ const batteryOptions = [
 
 export default function Products() {
   const [activeModal, setActiveModal] = useState(null);
-
   const openModal = (index) => setActiveModal(index);
   const closeModal = () => setActiveModal(null);
 
@@ -44,17 +44,16 @@ export default function Products() {
         <h3 className="intro-heading">Advanced Battery Solutions for Electric Vehicles</h3>
         <p className="intro-description">
           Experience the next generation of energy storage with our state-of-the-art batteries,
-          engineered for performance, reliability, and smart connectivity. Designed to power a range
-          of electric vehicles, our batteries deliver exceptional value and peace of mind.
+          engineered for performance, reliability, and smart connectivity.
         </p>
 
         <h4 className="features-heading">Key Features</h4>
         <ul className="feature-list">
-          <li><strong>Long Life Cycle:</strong> Up to 2000 charge cycles for extended usage and reliability.</li>
-          <li><strong>Comprehensive Warranty:</strong> Enjoy a 3-year warranty for worry-free usage.</li>
-          <li><strong>Certified Quality:</strong> AIS 156 quality standard certified and verified for maximum safety and compliance.</li>
-          <li><strong>Low Service Cost:</strong> Designed for minimal maintenance and reduced total cost of usage.</li>
-          <li><strong>Smart IoT Enabled:</strong> All batteries come with integrated IoT features for real-time monitoring, diagnostics, and enhanced user experience.</li>
+          <li><strong>Long Life Cycle:</strong> Up to 2000 charge cycles.</li>
+          <li><strong>3-Year Warranty:</strong> Worry-free usage.</li>
+          <li><strong>Certified Quality:</strong> AIS 156 standard compliant.</li>
+          <li><strong>Low Service Cost:</strong> Designed for minimal maintenance.</li>
+          <li><strong>Smart IoT Enabled:</strong> Real-time monitoring and diagnostics.</li>
         </ul>
       </div>
 
@@ -79,6 +78,16 @@ export default function Products() {
         ))}
       </div>
 
+      {/* ✅ Leasing CTA Section */}
+      <div className="leasing-cta">
+        <h3>Interested in Leasing?</h3>
+        <p>Explore our flexible leasing plans designed for every EV need.</p>
+        <Link to="/leasing">
+          <button className="leasing-button">Know More About Leasing</button>
+        </Link>
+      </div>
+
+      {/* ✅ Battery Modal */}
       {activeModal !== null && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

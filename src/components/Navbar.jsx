@@ -1,5 +1,5 @@
-// src/components/Navbar.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import "./Navbar.css";
@@ -32,8 +32,9 @@ export default function Navbar() {
         <HashLink smooth to="/">Home</HashLink>
         <HashLink smooth to="/#products">Products</HashLink>
         <HashLink smooth to="/#contact">Contact</HashLink>
-        <HashLink smooth to="/policies/privacy">Privacy Policy</HashLink>
-        <HashLink smooth to="/policies">Policies</HashLink>
+        <Link to="/careers">Careers</Link>
+        <Link to="/leasing">Leasing</Link>
+        <Link to="/policies">Policies</Link>
       </nav>
 
       <div className="navbar-right">

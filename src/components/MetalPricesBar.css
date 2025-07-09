@@ -1,0 +1,34 @@
+.metal-prices-section {
+  background-color: #1e1e1e;
+  color: #ff8c00;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 2px solid #ff8c00;
+}
+
+.ticker {
+  display: inline-block;
+  animation: scroll 25s linear infinite;
+}
+
+.ticker-item {
+  display: inline-block;
+  margin: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.unit {
+  color: #ccc;
+  font-size: 13px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

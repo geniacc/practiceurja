@@ -5,13 +5,13 @@
   left: 0;
   right: 0;
   height: 65px;
-  background-color: #0b7c7c;
+  background-color: #1f1f1f;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
   z-index: 1000;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 8px rgba(255, 140, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease;
   animation: fadeDown 0.5s ease-in-out;
 }
@@ -59,7 +59,7 @@
 }
 
 .navbar-center a:hover {
-  color: #00e6b8;
+  color: #ff8c00;
 }
 
 /* ========== SOCIAL ICONS ========== */
@@ -75,7 +75,7 @@
 }
 
 .navbar-right a:hover {
-  color: #00e6b8;
+  color: #ff8c00;
   transform: scale(1.1);
 }
 

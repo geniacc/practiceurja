@@ -3,11 +3,14 @@
   margin: 100px auto 60px;
   padding: 20px;
   text-align: center;
+  background-color: #f4f4f4; /* soft grey background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .policies-container h1 {
-  color: #0b7c7c;
-  margin-bottom: 40px; /* Increased spacing below heading */
+  color: #222; /* deep grey for headline */
+  margin-bottom: 40px;
   font-size: 28px;
 }
 
@@ -15,59 +18,51 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px; /* Increased spacing between buttons */
+  gap: 25px;
   margin-top: 30px;
 }
 
-.policy-btn {
-  background: #0b7c7c;
-  color: #fff;
-  padding: 14px 30px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.3s ease;
-  min-width: 220px;
-  text-align: center;
-  font-size: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.policy-btn:hover {
-  background: #095f5f;
-}
-
-.policy-detail {
-  max-width: 900px;
-  margin: 100px auto 40px;
-  padding: 20px;
-  line-height: 1.7;
-  color: #444;
-}
-
-.policy-detail h1 {
-  color: #0b7c7c;
-  margin-bottom: 20px;
-}
+/* Unified styling for policy buttons */
 .policy-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #0b7c7c;
+  background-color: #ff8c00; /* orange theme */
   color: #fff;
-  padding: 12px 20px;
-  border-radius: 6px;
+  padding: 14px 28px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: background 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   font-weight: 500;
+  font-size: 15px;
+  min-width: 220px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .policy-btn:hover {
-  background-color: #095f5f;
+  background-color: #e67600;
+  transform: scale(1.03);
 }
 
 .policy-icon {
   font-size: 18px;
+}
+
+/* Policy detail section */
+.policy-detail {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  line-height: 1.7;
+  color: #333;
+}
+
+.policy-detail h1 {
+  color: #ff8c00;
+  margin-bottom: 20px;
+  font-size: 24px;
 }

@@ -1,15 +1,16 @@
 body {
-  background: #f5f7f8;
+  background: #f4f4f4; /* light grey background */
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #222; /* dark grey text */
 }
 
 .franchise-form-page {
   max-width: 600px;
   margin: 80px auto;
   padding: 40px;
-  background: #fff;
+  background: #ffffff; /* white form card */
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  font-family: "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -20,95 +21,67 @@ body {
 
 .franchise-form-page h2 {
   text-align: center;
-  color: #0b7c7c;
+  color: #ff8c00; /* orange accent */
   font-size: 28px;
-  margin-bottom: 5px;
+  font-weight: 600;
+  margin-bottom: 25px;
 }
 
-.form-subtext {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 30px;
+.franchise-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #111;
+  font-size: 15px;
+  font-weight: 500;
 }
 
-.franchise-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group textarea {
+.franchise-form input,
+.franchise-form textarea {
   width: 100%;
-  padding: 14px 14px 14px 14px;
+  padding: 12px 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  margin-bottom: 25px;
   font-size: 15px;
-  transition: all 0.3s;
-  background-color: #fefefe;
+  color: #222;
+  background-color: #fafafa;
+  transition: border 0.3s, background 0.3s;
 }
 
-.form-group label {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #fff;
-  padding: 0 4px;
-  color: #999;
-  font-size: 14px;
-  pointer-events: none;
-  transition: 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #0b7c7c;
+.franchise-form input:focus,
+.franchise-form textarea:focus {
+  border-color: #ff8c00;
+  background-color: #fff;
   outline: none;
 }
 
-.form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label,
-.form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
-  top: -9px;
-  left: 10px;
-  font-size: 12px;
-  color: #0b7c7c;
-  background: #fff;
-}
-
-textarea {
+.franchise-form textarea {
   resize: vertical;
   min-height: 100px;
 }
 
-button[type="submit"] {
-  background-color: #0b7c7c;
-  color: white;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 500;
+.franchise-form button {
+  background: #ff8c00;
+  color: #fff;
   border: none;
+  padding: 14px 30px;
+  font-size: 16px;
   border-radius: 6px;
+  width: 100%;
   cursor: pointer;
+  font-weight: 500;
   transition: background 0.3s, transform 0.2s;
 }
 
-button[type="submit"]:hover {
-  background-color: #095f5f;
-  transform: scale(1.03);
+.franchise-form button:hover {
+  background: #e67600;
+  transform: scale(1.02);
 }
 
-/* Mobile */
+/* Mobile Responsive */
 @media (max-width: 500px) {
   .franchise-form-page {
-    margin: 40px 15px;
+    margin: 40px 20px;
     padding: 25px;
   }
 }

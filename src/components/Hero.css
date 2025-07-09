@@ -10,7 +10,7 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-/* Softer, cleaner overlay */
+/* Softer grey overlay with orange-tinted warmth */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -19,13 +19,12 @@
   height: 100%;
   background: linear-gradient(
     to bottom right,
-    rgba(0, 0, 0, 0.55),
-    rgba(11, 124, 124, 0.15)
+    rgba(30, 30, 30, 0.7),
+    rgba(255, 140, 0, 0.1)
   );
   z-index: 1;
 }
 
-/* Content Styles */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -44,18 +43,18 @@
 }
 
 .hero-content h1 span {
-  color: #00d4b1; /* Subtle brand highlight */
+  color: #ff8c00; /* orange brand highlight */
 }
 
 .hero-content p {
   font-size: 1.25rem;
-  color: #eeeeee;
+  color: #eaeaea;
   margin-bottom: 2rem;
 }
 
-/* Call-to-Action Button */
+/* CTA Button */
 .hero-btn {
-  background-color: #0b7c7c;
+  background-color: #ff8c00;
   color: white;
   padding: 12px 28px;
   border-radius: 30px;
@@ -63,16 +62,16 @@
   font-weight: bold;
   transition: all 0.3s ease;
   border: 2px solid transparent;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .hero-btn:hover {
   background: transparent;
-  border-color: #0b7c7c;
-  color: #0b7c7c;
+  border-color: #ff8c00;
+  color: #ff8c00;
 }
 
-/* Entrance Animation */
+/* Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -84,7 +83,7 @@
   }
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 2rem;

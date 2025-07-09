@@ -1,0 +1,73 @@
+/* src/components/Careers.css */
+.careers-page {
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212;
+  color: #fff;
+}
+
+.careers-hero {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #1f1f1f;
+  border-bottom: 2px solid #ff8c00;
+}
+
+.careers-hero h1 {
+  font-size: 2.5rem;
+  color: #ff8c00;
+}
+
+.careers-hero p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.careers-why, .careers-openings, .careers-hiring-process, .careers-footer-cta {
+  margin-top: 40px;
+}
+
+.careers-why ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.job-card {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  border-left: 4px solid #ff8c00;
+  border-radius: 6px;
+}
+
+.job-card h3 {
+  margin: 0;
+  color: #ff8c00;
+}
+
+.job-card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ff8c00;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.job-card button:hover {
+  background-color: #e67600;
+}
+
+.careers-footer-cta {
+  text-align: center;
+  padding: 30px 0;
+  background-color: #1f1f1f;
+  border-top: 2px solid #ff8c00;
+}
+
+.careers-footer-cta h2 {
+  margin-bottom: 10px;
+  color: #ff8c00;
+}

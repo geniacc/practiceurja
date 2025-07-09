@@ -1,0 +1,102 @@
+/* src/components/Leasing.css */
+
+.leasing-page {
+  background-color: #121212;
+  color: #fff;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.highlight {
+  color: #ff8c00;
+}
+
+.description {
+  max-width: 700px;
+  margin: 10px auto 30px;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.how-it-works h2 {
+  color: #ff8c00;
+  margin-top: 30px;
+}
+
+.how-it-works ul, .how-it-works ol {
+  list-style-position: inside;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 0;
+  color: #bbb;
+}
+
+.plans-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.plan-card {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+}
+
+.plan-card h3 {
+  color: #ff8c00;
+  margin-bottom: 10px;
+}
+
+.plan-card ul {
+  padding-left: 0;
+  list-style-type: none;
+  color: #eee;
+  text-align: left;
+}
+
+.calculator {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 40px;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+}
+
+.calculator h2 {
+  color: #ff8c00;
+  margin-bottom: 20px;
+}
+
+.calculator label {
+  display: block;
+  margin: 15px auto;
+  max-width: 400px;
+  text-align: left;
+  color: #ccc;
+}
+
+.calculator select,
+.calculator input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ffa500;
+  font-weight: bold;
+}
