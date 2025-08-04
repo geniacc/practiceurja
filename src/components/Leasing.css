@@ -1,102 +1,233 @@
 /* src/components/Leasing.css */
 
-.leasing-page {
-  background-color: #121212;
-  color: #fff;
-  padding: 40px 20px;
+.interactive-leasing.leasing-page {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 80px auto;
+  padding: 40px 20px;
+}
+
+.leasing-intro-text {
   text-align: center;
+  margin-bottom: 50px;
 }
 
-.highlight {
-  color: #ff8c00;
-}
-
-.description {
-  max-width: 700px;
-  margin: 10px auto 30px;
-  font-size: 1.1rem;
-  color: #ccc;
-}
-
-.how-it-works h2 {
-  color: #ff8c00;
-  margin-top: 30px;
-}
-
-.how-it-works ul, .how-it-works ol {
-  list-style-position: inside;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
-  padding-left: 0;
-  color: #bbb;
-}
-
-.plans-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin: 40px 0;
-}
-
-.plan-card {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
-}
-
-.plan-card h3 {
-  color: #ff8c00;
+.leasing-intro-text h1 {
+  font-size: 2.8rem;
+  color: var(--text-dark);
   margin-bottom: 10px;
 }
 
-.plan-card ul {
-  padding-left: 0;
-  list-style-type: none;
-  color: #eee;
-  text-align: left;
+.leasing-ui-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: flex-start;
 }
 
-.calculator {
-  background-color: #1e1e1e;
-  padding: 30px;
-  border-radius: 10px;
-  margin-top: 40px;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+.professional-card {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9e9e9;
 }
 
-.calculator h2 {
-  color: #ff8c00;
-  margin-bottom: 20px;
+.leasing-calculator h2,
+.amortization-section h2 {
+  text-align: center;
+  color: var(--text-dark);
+  margin-block-start: 0;
+  margin-block-end: 30px;
+  font-size: 24px;
+  font-weight: 600;
 }
 
-.calculator label {
+.input-group label {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text-light);
+  margin-bottom: 12px;
   display: block;
-  margin: 15px auto;
-  max-width: 400px;
-  text-align: left;
-  color: #ccc;
 }
 
-.calculator select,
-.calculator input {
+.input-group select {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
-  border-radius: 5px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px top 50%;
+  background-size: .65em auto;
 }
 
-.result {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #ffa500;
-  font-weight: bold;
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.tenure-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #eee;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.tenure-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.tenure-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.tenure-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.output-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.output-item span {
+  font-size: 14px;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.result-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.result-value.primary {
+  color: var(--primary-color);
+}
+
+.cta-button {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.amortization-section {
+  align-self: stretch;
+}
+
+.table-container {
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  padding: 14px 18px;
+  text-align: right;
+  border-bottom: 1px solid #e5e5e5;
+  white-space: nowrap;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 700; /* ✅ Increased font weight */
+  color: var(--primary-color); /* ✅ USE THEME COLOR FOR TEXT */
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.75px; /* ✅ Increased letter spacing */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody tr {
+  animation: fadeInRow 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInRow {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ✅ === NEW STYLES FOR THEMED SCROLLBAR === */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color-dark);
+}
+
+
+@media (max-width: 900px) {
+  .leasing-ui-wrapper {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,4 +1,11 @@
+/* --- Professional Aurora Theme Hero Section --- */
 .hero {
+  /* Design System Variables */
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+  --text-primary: #f5f5f5;
+  --text-secondary: #aab4c8;
+
   background: url("../assets/hero-bg.jpg") no-repeat center center/cover;
   height: 100vh;
   position: relative;
@@ -6,95 +13,90 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  color: white;
-  font-family: "Segoe UI", sans-serif;
+  color: var(--text-primary);
 }
 
-/* Softer grey overlay with orange-tinted warmth */
+/* ✨ Refined Overlay: A cleaner gradient from the bottom */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom right,
-    rgba(30, 30, 30, 0.7),
-    rgba(255, 140, 0, 0.1)
-  );
-  z-index: 1;
+  background: linear-gradient(to top, rgba(5, 10, 25, 0.85) 0%, rgba(5, 10, 25, 0.1) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 750px;
+  max-width: 800px;
   padding: 20px;
-  animation: fadeInUp 1s ease forwards;
+  animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
+/* ✨ Refined Heading: Smaller and sleeker for a more professional look */
 .hero-content h1 {
-  font-size: 3.2rem;
+  font-size: 3.8rem;
   margin-bottom: 1rem;
   font-weight: 700;
-  line-height: 1.2;
-  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  color: var(--text-primary);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content h1 span {
-  color: #ff8c00; /* orange brand highlight */
+  color: var(--primary-color);
+  text-shadow: 0 0 15px var(--primary-glow);
 }
 
 .hero-content p {
   font-size: 1.25rem;
-  color: #eaeaea;
-  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* CTA Button */
-.hero-btn {
-  background-color: #ff8c00;
+/* ✨ Refined Button: Smaller padding and font-size */
+/* Note: This style will apply to all .button-primary instances on your site. */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px; /* Smaller padding */
+  background: var(--primary-color);
   color: white;
-  padding: 12px 28px;
-  border-radius: 30px;
-  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem; /* Slightly smaller font */
   font-weight: bold;
+  cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px var(--primary-glow);
+  text-decoration: none;
+}
+.button-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 25px var(--primary-glow);
 }
 
-.hero-btn:hover {
-  background: transparent;
-  border-color: #ff8c00;
-  color: #ff8c00;
-}
-
-/* Animation */
+/* --- Animation --- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 2.5rem; /* Adjusted for new base size */
   }
-
   .hero-content p {
-    font-size: 1rem;
-  }
-
-  .hero-btn {
-    padding: 10px 20px;
-    font-size: 14px;
+    font-size: 1.1rem;
   }
 }

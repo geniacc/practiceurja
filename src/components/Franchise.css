@@ -1,134 +1,192 @@
+/* --- Keyframes & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
+
+@keyframes aurora-float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 60px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* --- Aurora Background --- */
+.aurora-bg {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1; overflow: hidden;
+}
+.aurora-shape {
+  position: absolute; border-radius: 50%;
+  filter: blur(120px); opacity: 0.1;
+  animation: aurora-float 25s ease-in-out infinite alternate;
+}
+.shape-1 { width: 500px; height: 500px; top: -150px; left: -150px; background-color: #ffc107; }
+.shape-2 { width: 450px; height: 450px; bottom: -100px; right: -100px; background-color: #ff8c00; animation-delay: 5s; }
+
+
+/* --- Main Section --- */
 .franchise-section {
-  padding: 60px 20px;
-  background: #f9f9f9; /* ⬅️ Light, soft grey like About section */
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
+  padding: 80px 20px;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  color: #2d3748;
+  position: relative;
+  overflow: hidden;
 }
 
-.franchise-grid {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  align-items: center;
-  gap: 40px;
+.franchise-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
-.franchise-text h2 {
-  font-size: 36px;
-  color: #ff8c00; /* orange */
+/* --- Intro Section (Replaces Grid) --- */
+.franchise-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px;
+}
+
+.franchise-intro h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.8rem;
+  color: #2d3748;
   margin-bottom: 20px;
 }
 
-.franchise-text p {
-  font-size: 16px;
+.franchise-intro p {
+  font-size: 1.1rem;
   line-height: 1.7;
-  margin-bottom: 20px;
-  color: #444;
+  margin-bottom: 30px;
+  color: #5a6a85;
 }
 
-.franchise-btn {
-  background: #ff8c00;
-  color: #fff;
+/* --- Themed CTA Button --- */
+.cta-btn {
+  background: #F57C00;
+  color: white;
   border: none;
-  padding: 12px 28px;
-  border-radius: 6px;
-  font-size: 16px;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 124, 0, 0.3);
 }
 
-.franchise-btn:hover {
-  background: #e67600;
-  transform: scale(1.05);
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(245, 124, 0, 0.4);
 }
 
-.franchise-media img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Accordion Styles */
+/* --- Themed Accordion --- */
 .franchise-accordion {
   max-width: 900px;
-  margin: 50px auto;
-  background: #1a1a1a; /* black card */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  color: #f1f1f1;
+  margin: 0 auto 80px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  padding: 15px 30px;
 }
 
 .accordion-item {
-  border-bottom: 1px solid #444;
-  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.accordion-item:last-child {
+  border-bottom: none;
 }
 
-.accordion-item h3 {
+.accordion-header {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
-  color: #ff8c00;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  color: #2d3748;
   margin: 0;
+  padding: 20px 0;
+}
+.accordion-header span {
+  color: #F57C00;
+  font-size: 1rem;
 }
 
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  padding: 0;
-  transition: max-height 0.4s ease, padding 0.3s ease;
+  transition: max-height 0.4s ease-out;
 }
 
 .accordion-content.open {
   max-height: 500px;
-  padding: 15px 0 0;
+}
+
+.accordion-content-inner {
+  padding: 0 0 20px;
 }
 
 .accordion-content ul {
-  padding-left: 20px;
-  color: #ccc;
-  line-height: 1.7;
+  padding-left: 5px;
+  margin: 0;
+  list-style: none;
+  color: #5a6a85;
+  line-height: 1.8;
 }
 
 .accordion-content li {
-  margin-bottom: 10px;
-  font-size: 15px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  padding-left: 25px;
+  position: relative;
+}
+.accordion-content li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #F57C00;
+  font-weight: bold;
 }
 
-/* CTA Section */
+
+/* --- Final CTA Section --- */
 .franchise-cta {
-  background: #1a1a1a;
-  margin: 50px auto 0;
-  padding: 30px;
-  border-radius: 10px;
+  background: rgba(255, 240, 224, 0.5);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 20px;
   max-width: 800px;
   text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  color: #f1f1f1;
 }
 
 .franchise-cta h3 {
-  font-size: 24px;
-  color: #ff8c00;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #2d3748;
   margin-bottom: 10px;
 }
 
 .franchise-cta p {
-  font-size: 15px;
-  color: #ccc;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #5a6a85;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .franchise-text h2 {
-    font-size: 28px;
+  .franchise-intro h2 {
+    font-size: 2.2rem;
   }
-
-  .accordion-item h3 {
-    font-size: 18px;
+  .accordion-header {
+    font-size: 1.1rem;
   }
 }

@@ -1,5 +1,6 @@
+/* src/components/Footer.css */
 .footer {
-  background-color: #1a1a1a; /* dark blackish background */
+  background-color: #1a1a1a;
   color: #dddddd;
   padding: 50px 20px 20px;
   font-size: 15px;
@@ -23,6 +24,13 @@
   min-width: 220px;
 }
 
+/* ✅ FIX: Added flex properties to center the logo and tagline */
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns to the left on desktop */
+}
+
 .footer-logo {
   height: 50px;
   margin-bottom: 15px;
@@ -37,7 +45,7 @@
 .footer-center h4,
 .footer-right h4 {
   margin-bottom: 12px;
-  color: #ff8c00; /* orange heading */
+  color: #ff8c00;
   font-weight: 600;
   font-size: 16px;
 }
@@ -61,7 +69,7 @@
 
 .footer-center a:hover,
 .footer-right a:hover {
-  color: #ff8c00; /* orange on hover */
+  color: #ff8c00;
   text-decoration: underline;
 }
 
@@ -101,11 +109,13 @@
     text-align: center;
   }
 
+  /* ✅ FIX: Ensure content is centered on mobile */
   .footer-left,
   .footer-center,
   .footer-right {
     text-align: center;
     margin-bottom: 30px;
+    align-items: center;
   }
 
   .footer-social {
@@ -113,7 +123,6 @@
   }
 }
 
-/* Fade In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

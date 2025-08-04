@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaPhoneAlt } from "react-icons/fa"; // ✅ updated import
+
 import "./Navbar.css";
 import logo from "../assets/logo.png";
 
@@ -35,13 +36,24 @@ export default function Navbar() {
         <Link to="/careers">Careers</Link>
         <Link to="/leasing">Leasing</Link>
         <Link to="/policies">Policies</Link>
+        <Link to="/association">Association</Link> {/* ✅ New Link */}
       </nav>
 
-      <div className="navbar-right">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook /></a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-      </div>
+     <div className="navbar-right">
+  <div className="social-contact-wrapper">
+    <div className="social-icons">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebook /></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+    </div>
+
+    <a href="tel:+919876543210" className="navbar-contact">
+      <FaPhoneAlt className="phone-icon" /> +91 98765 43210
+    </a>
+  </div>
+</div>
+
+      
     </header>
   );
 }

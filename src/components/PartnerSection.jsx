@@ -1,6 +1,5 @@
 import React from "react";
-import "./PartnerSection.css";
-import partnerImage from "../assets/partner.jpg";
+import "./PartnerSection.css"; // Make sure this import line is at the top
 
 export default function PartnerSection() {
   return (
@@ -10,7 +9,7 @@ export default function PartnerSection() {
         <p>
           Be part of the clean mobility revolution. Collaborate with Urja Mobility and grow your business while driving positive change.
         </p>
-        <a href="/franchise-inquiry" className="partner-btn">Become a Partner</a>
+        <a href="/franchise-inquiry" className="button-primary">Become a Partner</a>
       </div>
 
       <div className="partner-right">

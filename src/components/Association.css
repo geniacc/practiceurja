@@ -1,0 +1,170 @@
+/* src/components/Association.css */
+
+.association-container {
+  padding: 40px 20px;
+  background: transparent;
+  text-align: center;
+  color: #333;
+}
+
+.association-title {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #ff8c00;
+}
+
+.association-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* ✅ This is the updated rule */
+.association-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.association-card {
+  background: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  padding: 25px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  color: #333;
+  /* ✅ Added a flex-basis for better control in a flex container */
+  flex: 0 1 300px; 
+}
+
+.association-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.association-card h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #ff8c00;
+}
+
+.association-card p {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.association-card button {
+  padding: 10px 18px;
+  background-color: #ff8c00;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.association-card button:hover {
+  background-color: #e67600;
+}
+
+/* === MODAL AND FORM STYLES === */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInModal 0.3s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.inquiry-form-container {
+  text-align: center;
+}
+
+.inquiry-form-container h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.inquiry-form-container p {
+  color: var(--text-light);
+  margin-bottom: 25px;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.inquiry-form input,
+.inquiry-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 15px;
+}
+
+.inquiry-form input:focus,
+.inquiry-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.15);
+}
+
+.inquiry-form button {
+  padding: 14px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.inquiry-form button:hover {
+  background: var(--primary-color-dark);
+}

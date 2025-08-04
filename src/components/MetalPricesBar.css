@@ -1,34 +1,82 @@
+/* src/components/MetalPricesBar.css */
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .metal-prices-section {
-  background-color: #1e1e1e;
-  color: #ff8c00;
-  padding: 10px 0;
+  /* Using the same theme variables from the About/Careers sections */
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+  --text-primary: #f0f0f0;
+  --text-secondary: #f4f4f6;
+  --card-bg: rgba(22, 22, 34, 0.55);
+  --card-border: rgba(255, 255, 255, 0.15);
+
+  /* Applying the "Glassmorphism" effect */
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 14px 0; /* Increased padding */
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
   overflow: hidden;
-  white-space: nowrap;
-  border-bottom: 2px solid #ff8c00;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
 }
 
 .ticker {
-  display: inline-block;
-  animation: scroll 25s linear infinite;
+  display: flex;
+  width: fit-content;
+  animation: scroll-left 30s linear infinite;
 }
 
 .ticker-item {
-  display: inline-block;
-  margin: 0 30px;
-  font-size: 16px;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 40px; /* Increased spacing between items */
+  font-size: 1.05rem; /* ✅ Increased font size */
+  color: var(--text-primary);
+  position: relative;
+}
+
+/* More subtle dot separator for a cleaner look */
+.ticker-item::after {
+  content: '•';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--card-border);
+  font-size: 1.5rem;
+}
+
+/* Hide separator for the very last item in the extended list */
+.ticker .ticker-item:last-child::after {
+  content: '';
+}
+
+.ticker-item strong {
+  font-weight: 700;
+  margin-right: 10px; /* More space */
+  font-size: 1.1rem; /* Make name slightly larger */
+}
+
+.price {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.1rem; /* Match the name size */
+  text-shadow: 0 0 8px var(--primary-glow);
 }
 
 .unit {
-  color: #ccc;
-  font-size: 13px;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  color: var(--text-secondary);
+  font-size: 0.9rem; /* Slightly larger unit text */
+  margin-left: 10px; /* More space */
+  opacity: 0.8; /* Softer appearance */
 }

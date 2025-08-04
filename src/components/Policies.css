@@ -1,68 +1,93 @@
+/* src/components/Policies.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap');
+
+/* --- Main Page Wrapper --- */
+.policies-page {
+  padding: 100px 20px;
+  background-color: #ffffff; /* White background */
+  font-family: 'Inter', sans-serif;
+  min-height: 80vh;
+}
+
 .policies-container {
-  max-width: 900px;
-  margin: 100px auto 60px;
-  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 0;
   text-align: center;
-  background-color: #f4f4f4; /* soft grey background */
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .policies-container h1 {
-  color: #222; /* deep grey for headline */
-  margin-bottom: 40px;
-  font-size: 28px;
+  font-family: 'Poppins', sans-serif;
+  color: #2d3748; /* Dark Grey */
+  margin-bottom: 15px;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.policies-container p {
+  color: #718096; /* Medium Grey */
+  font-size: 1.1rem;
 }
 
 .policies-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 25px;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
-/* Unified styling for policy buttons */
-.policy-btn {
+/* Upgraded policy links */
+.policy-card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: #ff8c00; /* orange theme */
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 8px;
+  gap: 15px;
+  background-color: #f7fafc; /* Light Grey */
+  color: #4a5568; /* Readable Grey */
+  padding: 20px 25px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0; /* Light Grey Border */
   text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  min-width: 220px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
-.policy-btn:hover {
-  background-color: #e67600;
-  transform: scale(1.03);
+.policy-card:hover {
+  background-color: white;
+  color: #ff8c00; /* Orange */
+  transform: translateY(-5px);
+  border-color: #ff8c00;
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.1);
 }
 
 .policy-icon {
-  font-size: 18px;
+  font-size: 1.2rem;
+  color: #ff8c00; /* Orange */
+  flex-shrink: 0;
 }
 
-/* Policy detail section */
+/* Styles for individual policy detail pages */
 .policy-detail {
   max-width: 900px;
   margin: 100px auto 40px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  line-height: 1.7;
-  color: #333;
+  padding: 40px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  line-height: 1.8;
+  color: #4a5568;
+  text-align: left;
 }
 
 .policy-detail h1 {
+  font-family: 'Poppins', sans-serif;
   color: #ff8c00;
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 25px;
+  font-size: 2.2rem;
+}
+.policy-detail h2, .policy-detail h3 {
+  font-family: 'Poppins', sans-serif;
+  color: #2d3748;
+  margin-top: 30px;
 }

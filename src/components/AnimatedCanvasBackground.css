@@ -1,0 +1,12 @@
+/* src/components/AnimatedCanvasBackground.css */
+.animated-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;       /* full viewport width */
+  height: 100vh;      /* full viewport height */
+  z-index: -1;        /* behind all other elements */
+  pointer-events: none;  /* allow clicks through */
+  background-color: transparent; /* no background color to preserve transparency */
+  display: block;     /* avoid inline canvas spacing issues */
+}

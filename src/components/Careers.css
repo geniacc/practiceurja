@@ -1,73 +1,227 @@
 /* src/components/Careers.css */
-.careers-page {
-  padding: 40px 20px;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #121212;
-  color: #fff;
+
+/* --- ✅ Theme variables for this component (ORANGE THEME) --- */
+.careers-page-wrapper {
+  --primary-glow: rgba(245, 124, 0, 0.4); /* Orange glow */
+  --primary-color: #F57C00; /* Orange primary */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --card-shadow: rgba(0, 0, 0, 0.1);
+
+  position: relative;
+  overflow: hidden;
+  padding: 100px 20px;
+  /* ✅ Background properties removed to make it transparent */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* --- Aurora Background (Light Theme) --- */
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.2; 
+}
+/* ✅ Updated shape colors for an orange/warm theme */
+.shape-1 { width: 500px; height: 500px; top: -150px; left: -150px; background-color: #FFD700; } /* Gold */
+.shape-2 { width: 450px; height: 450px; top: 20%; right: -100px; background-color: #ff8c00; } /* Dark Orange */
+.shape-3 { width: 400px; height: 400px; bottom: -150px; left: 25%; background-color: #E0BBE4; } /* Light Purple */
+
+/* Animation is no longer needed as the gradient is removed */
+@keyframes aurora-pan {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+.careers-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Hero Section --- */
 .careers-hero {
   text-align: center;
-  padding: 40px 0;
-  background-color: #1f1f1f;
-  border-bottom: 2px solid #ff8c00;
+  max-width: 800px;
+  margin: 0 auto 80px;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
 }
 
 .careers-hero h1 {
-  font-size: 2.5rem;
-  color: #ff8c00;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .careers-hero p {
-  font-size: 1.2rem;
-  color: #ccc;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
 }
 
-.careers-why, .careers-openings, .careers-hiring-process, .careers-footer-cta {
-  margin-top: 40px;
+/* --- "Why Us" Bento Grid --- */
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 80px;
 }
 
-.careers-why ul {
-  margin-top: 15px;
-  padding-left: 20px;
+.info-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 35px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px 0 var(--primary-glow);
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* ✅ Updated gradient to use new orange primary color */
+  background: linear-gradient(45deg, var(--primary-color), #ff5f6d);
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 auto 20px;
+}
+
+.info-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.info-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* --- Openings Section --- */
+.careers-openings {
+  margin-bottom: 80px;
+}
+
+.careers-openings h2 {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.job-listings {
+  display: grid;
+  gap: 20px;
 }
 
 .job-card {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border: 1px solid #333;
-  margin-bottom: 20px;
-  border-left: 4px solid #ff8c00;
-  border-radius: 6px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 25px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.job-card:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--primary-color);
+}
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .job-card h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
   margin: 0;
-  color: #ff8c00;
 }
 
-.job-card button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #ff8c00;
+.job-card-header span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.job-card p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.apply-btn {
+  padding: 10px 22px;
+  background: var(--primary-color);
+  color: white;
   border: none;
-  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.job-card button:hover {
+.apply-btn:hover {
+  /* ✅ Darker shade of the new orange primary color for hover */
   background-color: #e67600;
 }
 
+/* --- Footer CTA --- */
 .careers-footer-cta {
   text-align: center;
-  padding: 30px 0;
-  background-color: #1f1f1f;
-  border-top: 2px solid #ff8c00;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
 }
 
 .careers-footer-cta h2 {
-  margin-bottom: 10px;
-  color: #ff8c00;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+}
+
+.careers-footer-cta p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.careers-footer-cta strong {
+  font-weight: 600;
+  color: var(--primary-color);
 }

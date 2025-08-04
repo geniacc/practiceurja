@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  
 }
 
 .navbar {
@@ -69,4 +70,41 @@ body {
 }
 html {
   scroll-behavior: smooth;
+}
+/* --- Global Styles for Reusable Components --- */
+
+/* Centering Container for the Button */
+.feedback-button-container {
+  /* Sits on top of the page's background */
+  background: transparent; 
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Reusable Primary Button Style (from your theme) */
+.button-primary {
+  /* Assumes CSS variables are defined on a parent element */
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--primary-glow);
+  text-decoration: none;
+}
+
+.button-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px var(--primary-glow);
 }

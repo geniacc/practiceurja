@@ -1,74 +1,165 @@
-.carbon-savings-page {
-  max-width: 1000px;
-  margin: auto;
-  padding: 40px 20px;
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  border-radius: 12px;
+/* --- Animation Keyframes --- */
+@keyframes aurora-pan {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.carbon-savings-page h2 {
-  color: #ff8c00;
-  font-size: 32px;
-  margin-bottom: 10px;
+/* --- Main Page Wrapper --- */
+.carbon-savings-page {
+  /* Design System Variables */
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+  --text-primary: #f5f5f5;
+  --text-secondary: #aab4c8;
+  --card-bg: rgba(22, 22, 34, 0.6);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --card-shadow: rgba(0, 0, 0, 0.2);
+
+  min-height: 100vh;
+  padding: 100px 20px;
+  
+  /* Applying the Aurora Background */
+  background: linear-gradient(125deg, #020024, #1d1d42, #5a2a53, #b45f4a);
+  background-size: 400% 400%;
+  animation: aurora-pan 20s ease infinite alternate;
+}
+
+.carbon-savings-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInUp 0.6s ease-out;
+}
+.page-header h2 {
+    font-size: 3rem;
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Glassmorphism Content Cards --- */
+.live-counter, .calculator-box, .info-section {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 var(--card-shadow);
+    margin-bottom: 30px;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .live-counter {
-  margin: 20px 0;
-  background-color: #2a2a2a;
-  padding: 16px;
-  border-left: 5px solid #ff8c00;
-  font-size: 18px;
-  font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    animation-delay: 0.2s;
 }
-
 .highlight {
-  color: #ff8c00;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
 .calculator-box {
-  margin: 30px 0;
-  padding: 25px;
-  background-color: #2a2a2a;
-  border-radius: 10px;
+    animation-delay: 0.4s;
+}
+.calculator-box h3 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+.calculator-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
 }
 
 .calculator-box input[type="number"] {
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 6px;
-  border: none;
-  width: 250px;
-  font-size: 14px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  width: 100%;
+  max-width: 300px;
+  font-size: 1rem;
+  background-color: rgba(0,0,0,0.2);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+.calculator-box input[type="number"]::placeholder { color: var(--text-secondary); }
+.calculator-box input[type="number"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 10px var(--primary-glow);
 }
 
-.calculator-box button {
-  padding: 10px 16px;
-  background-color: #ff8c00;
-  color: #1a1a1a;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.savings-result {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
 }
-
-.calculator-box button:hover {
-  background-color: #ffa733;
+.savings-result strong {
+    color: var(--text-primary);
 }
 
 .info-section {
-  margin-top: 30px;
+    text-align: left;
+    animation-delay: 0.6s;
 }
-
-.info-section h3,
-.info-section h4 {
-  color: #ff8c00;
-  margin-top: 20px;
+.info-section h3, .info-section h4 {
+    color: var(--primary-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
+.info-section h3 { font-size: 1.5rem; }
+.info-section h4 { font-size: 1.2rem; }
 
 .info-section ul {
-  padding-left: 20px;
-  line-height: 1.7;
-  color: #ccc;
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+.info-section li { margin-bottom: 10px; }
+
+
+/* --- Unified Button Style --- */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+.button-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px var(--primary-glow);
 }

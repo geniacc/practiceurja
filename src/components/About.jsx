@@ -1,71 +1,90 @@
-// src/components/About.jsx
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Add this
+import { useNavigate } from "react-router-dom";
+import { FaBolt, FaEye, FaStar, FaLeaf, FaShieldAlt, FaThumbsUp } from "react-icons/fa";
 import "./About.css";
 
 export default function About() {
-  const navigate = useNavigate(); // ✅ Initialize navigation
+  const navigate = useNavigate();
 
   return (
     <section id="about" className="about-section">
-      <h2>About Us</h2>
-      <p className="intro-text">
-        Urja Mobility is transforming electric mobility by making it more affordable and accessible. We specialize in providing battery leasing solutions for 2-wheeler and 3-wheeler electric vehicles.
-        Batteries account for nearly 50% of the total cost of an electric vehicle. By choosing Urja Mobility, customers avoid the high upfront investment required to purchase a battery. We offer a flexible leasing model with affordable monthly EMIs, so you can enjoy the benefits of electric mobility without the burden of heavy capital expenditure.
-      </p>
+      <div className="aurora-bg">
+    <div className="aurora-shape shape-1"></div>
+    <div className="aurora-shape shape-2"></div>
+    <div className="aurora-shape shape-3"></div>
+</div>
+      <div className="about-wrapper">
 
-      <div className="about-content">
-        <div className="about-box">
-          <h3>What We Do</h3>
-          <ul>
-            <li>Offer electric vehicle leasing for individuals and businesses.</li>
-            <li>Provide battery swapping and charging infrastructure.</li>
-            <li>Enable smart, affordable mobility solutions across urban and rural areas.</li>
-            <li>Promote clean energy adoption through accessible EV solutions.</li>
-            <li>Encourage carbon footprint reduction through clean, efficient electric mobility.</li>
-          </ul>
-
-          {/* ✅ Use navigate instead of window.location.href */}
-          <button
-            className="carbon-btn"
-            onClick={() => navigate("/carbon-savings")}
-          >
-            Know more about Carbon Saving
-          </button>
+        <div className="intro-container">
+          <div className="intro-badge">About Urja Mobility</div>
+          <h1>Powering India's EV Revolution, One Battery at a Time.</h1>
+          <p className="intro-text">
+            We're breaking down the barriers to electric mobility. Our innovative battery leasing model makes EVs affordable, accessible, and hassle-free for everyone.
+          </p>
         </div>
 
-        <div className="about-box">
-          <h3>Why Lease with Urja Mobility?</h3>
-          <ul>
-            <li><strong>Lower Upfront Costs:</strong> Save on the biggest expense in your EV purchase by leasing the battery.</li>
-            <li><strong>Flexible Plans:</strong> Choose a lease option that fits your budget and usage needs.</li>
-            <li><strong>Reliable Quality:</strong> All our batteries meet strict quality standards and are backed by comprehensive support.</li>
-            <li><strong>Risk Management:</strong> We handle insurance and risk assessment, giving you peace of mind.</li>
-            <li><strong>Clear Process:</strong> Our straightforward documentation and support make leasing easy for individuals and businesses.</li>
-          </ul>
+        <div className="features-grid">
+          <div className="info-card featured-card">
+            <div className="icon-wrapper"><FaStar /></div>
+            <div className="card-text-content">
+              <h3>Why Lease with Us?</h3>
+              <p>Eliminate high upfront costs, enjoy flexible plans, and forget about maintenance. We handle the risks so you can enjoy the ride.</p>
+            </div>
+          </div>
+          <div className="info-card">
+            <div className="icon-wrapper"><FaBolt /></div>
+            <h3>What We Do</h3>
+            <p>Affordable battery leasing and a robust swapping network to keep you moving.</p>
+          </div>
+          <div className="info-card">
+            <div className="icon-wrapper"><FaLeaf /></div>
+            <h3>Drive Green</h3>
+            <p>A smart financial decision and a powerful choice for the planet.</p>
+            <button className="cta-button" onClick={() => navigate("/carbon-savings")}>
+              Calculate Your Savings
+            </button>
+          </div>
         </div>
 
-        <div className="about-box comparison-box">
-          <h3>Leasing vs. Financing</h3>
+        <div className="mission-vision-container">
+          <div className="mission-vision-card">
+            <div className="icon-wrapper secondary"><FaEye /></div>
+            <h3>Our Vision</h3>
+            <p>To become India’s most trusted electric mobility enabler, creating a future where sustainable transport is accessible to all.</p>
+          </div>
+          <div className="mission-vision-card">
+            <div className="icon-wrapper secondary"><FaShieldAlt /></div>
+            <h3>Our Mission</h3>
+            <p>To accelerate the transition to sustainable mobility by removing financial and infrastructural barriers through innovative, people-first energy solutions.</p>
+          </div>
+        </div>
+        
+        <div className="comparison-container">
+          <h2>Leasing vs. Buying: The Smart Choice</h2>
           <div className="comparison-grid">
-            <div className="comparison-card">
-              <h4>Leasing</h4>
+            <div className="comparison-card featured">
+              <h4>Lease with Urja</h4>
               <ul>
-                <li>Lower upfront costs and predictable payments.</li>
-                <li>No ownership; use the vehicle for a set term.</li>
-                <li>Flexibility to upgrade to new models.</li>
+                <li><FaThumbsUp className="check-icon"/> Minimal Upfront Cost</li>
+                <li><FaThumbsUp className="check-icon"/> Zero Maintenance Liability</li>
+                <li><FaThumbsUp className="check-icon"/> Always the Latest Tech</li>
+                <li><FaThumbsUp className="check-icon"/> Flexible Upgrade Options</li>
+                <li><FaThumbsUp className="check-icon"/> Full Insurance & Support</li>
               </ul>
             </div>
             <div className="comparison-card">
-              <h4>Financing</h4>
+              <h4>Buy Outright</h4>
               <ul>
-                <li>Pay towards full ownership of the vehicle.</li>
-                <li>Higher initial investment, long-term asset value.</li>
-                <li>Ideal for those wanting permanent ownership.</li>
+                <li>High Initial Investment</li>
+                <li>Full Maintenance Responsibility</li>
+                <li>Technology Becomes Outdated</li>
+                <li>Resale Value Depreciates</li>
+                <li>No Included Support</li>
               </ul>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

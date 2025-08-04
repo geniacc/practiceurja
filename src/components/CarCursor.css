@@ -1,0 +1,15 @@
+.car-cursor {
+  position: fixed;
+  width: 30px;
+  height: auto;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+
+@media (max-width: 768px) {
+  .car-cursor {
+    display: none;
+  }
+}

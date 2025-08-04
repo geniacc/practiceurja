@@ -1,10 +1,69 @@
+/* --- ✅ ADDITION: Keyframes for the animated tint --- */
+@keyframes aurora-float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* --- Original Keyframes --- */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- ✅ ADDITION: Aurora Background Styles --- */
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: aurora-float 20s ease-in-out infinite alternate;
+}
+.shape-1 { width: 400px; height: 400px; top: 10%; left: -150px; background-color: #ffc107; }
+.shape-2 { width: 350px; height: 350px; top: 40%; right: -100px; background-color: #ff8c00; animation-delay: 4s; }
+.shape-3 { width: 300px; height: 300px; bottom: 5%; left: 20%; background-color: #ffdab9; animation-delay: 8s; }
+
+
+/* --- ✅ MODIFICATION: Main Section Wrapper --- */
 .products-section {
   padding: 60px 20px;
-  background: #d4d4d4;
+  background: transparent;
   text-align: center;
-  max-width: 1200px;
-  margin: auto;
-  border-radius: 8px;
+  position: relative; /* Necessary for positioning the background */
+  overflow: hidden;   /* Contains the blurred shapes */
+}
+
+/* --- ✅ MODIFICATION: Content Wrapper --- */
+.products-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: transparent;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  position: relative; /* Ensures content is on top of the tint */
+  z-index: 2;
 }
 
 .battery-banner {
@@ -13,7 +72,7 @@
   display: block;
 }
 
-.products-section h2 {
+.products-wrapper h2 {
   font-size: 32px;
   color: #ff8c00;
   margin-bottom: 40px;
@@ -21,13 +80,13 @@
 
 /* Product Intro */
 .product-intro {
-  max-width: 900px;
   margin: 0 auto 60px;
   padding: 30px;
-  text-align: center;
-  background: #2a2a2a; /* less harsh than #1a1a1a */
+  background: rgba(245, 245, 245, 0.8); /* Slight transparency to hint at bg */
+  backdrop-filter: blur(5px);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15); /* subtle orange glow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .intro-heading {
@@ -39,7 +98,7 @@
 
 .intro-description {
   font-size: 15px;
-  color: #e0e0e0;
+  color: #444;
   line-height: 1.7;
   margin-bottom: 30px;
 }
@@ -53,18 +112,30 @@
 
 .feature-list {
   text-align: left;
-  list-style: disc;
+  list-style: none; /* Removed disc for custom icon */
   margin: 0 auto;
   max-width: 700px;
-  padding-left: 20px;
-  color: #ccc;
+  padding-left: 0;
+  color: #444;
 }
 
 .feature-list li {
   margin-bottom: 15px;
   font-size: 15px;
   line-height: 1.6;
+  position: relative;
+  padding-left: 25px; /* Space for custom icon */
 }
+
+/* ✅ ADDITION: Custom bullet point for features */
+.feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #ff8c00;
+  font-weight: bold;
+}
+
 
 /* Product Cards */
 .products-container {
@@ -94,12 +165,6 @@
 .flip-card:nth-child(2) { animation-delay: 0.2s; }
 .flip-card:nth-child(3) { animation-delay: 0.3s; }
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 .flip-card-inner {
   width: 100%;
@@ -120,8 +185,10 @@
   height: 100%;
   backface-visibility: hidden;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  background: #1a1a1a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -148,32 +215,50 @@
 .flip-card-front p,
 .flip-card-back p {
   font-size: 14px;
-  color: #ccc;
+  color: #555;
   text-align: center;
   padding: 0 10px;
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
-  background: #2a2a2a;
+  background: rgba(247, 247, 247, 0.9);
 }
 
-/* Learn More Button */
-.learn-more {
-  margin-top: 15px;
-  padding: 8px 16px;
-  border: 1px solid #ff8c00;
-  color: #ff8c00;
-  background: transparent;
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.learn-more,
+.download-btn {
+  padding: 0.6rem 1rem;
+  border: none;
   border-radius: 25px;
-  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: #ff8c00;
+  width: 180px;
+}
+
+.download-btn {
+  background-color: #6c757d;
 }
 
 .learn-more:hover {
-  background: #ff8c00;
-  color: #1a1a1a;
+  background-color: #e67600;
+  transform: scale(1.05);
+}
+
+.download-btn:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
 }
 
 /* Modal */
@@ -183,7 +268,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,26 +278,16 @@
 }
 
 .modal-content {
-  background: #1a1a1a;
+  background: #ffffff;
   padding: 30px;
   border-radius: 12px;
   max-width: 500px;
   width: 100%;
   text-align: left;
-  color: #e0e0e0;
+  color: #333;
   border: 2px solid #ff8c00;
   animation: scaleIn 0.3s ease-in-out forwards;
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .modal-content h3 {
@@ -222,7 +298,7 @@
 
 .modal-content p {
   font-size: 15px;
-  color: #ccc;
+  color: #444;
   line-height: 1.6;
 }
 
@@ -230,10 +306,53 @@
   margin-top: 20px;
   padding: 8px 16px;
   background: #ff8c00;
-  color: #1a1a1a;
+  color: #fff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
+}
+
+/* Leasing CTA */
+.leasing-cta {
+  margin-top: 60px;
+  background: rgba(248, 248, 248, 0.8);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leasing-cta h3 {
+  color: #ff8c00;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.leasing-cta p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.leasing-button {
+  padding: 10px 24px;
+  font-size: 15px;
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.leasing-button:hover {
+  background-color: #e67600;
+  transform: scale(1.05);
 }
 
 /* Responsive */
@@ -248,53 +367,19 @@
     height: 340px;
   }
 
-  .product-intro h3 {
-    font-size: 18px;
+  .intro-heading {
+    font-size: 20px;
   }
 
-  .product-intro p {
+  .intro-description {
     font-size: 14px;
   }
 
   .modal-content {
     padding: 20px;
   }
-}
-.leasing-cta {
-  margin-top: 60px;
-  background: #2a2a2a;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.leasing-cta h3 {
-  color: #ff8c00;
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.leasing-cta p {
-  color: #ccc;
-  font-size: 15px;
-  margin-bottom: 20px;
-}
-
-.leasing-button {
-  padding: 10px 24px;
-  font-size: 15px;
-  background-color: #ff8c00;
-  color: #1a1a1a;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.leasing-button:hover {
-  background-color: #ffa733;
+  .products-wrapper {
+    padding: 1.5rem;
+  }
 }

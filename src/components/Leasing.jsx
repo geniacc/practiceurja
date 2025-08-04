@@ -1,104 +1,174 @@
-// src/components/Leasing.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Leasing.css";
 
-const pricing = {
-  "L2 Battery": { monthly: 1500 },
-  "L3 Battery": { monthly: 2500 },
-  "L5 Battery": { monthly: 3500 },
+// Data is kept inside the component as requested
+const leasingData = {
+  "L2 Battery": {
+    12: { loan: 42000, emi: 6499.0, annualROI: 133.16 },
+    18: { loan: 42000, emi: 4499.0, annualROI: 96.677 },
+    24: { loan: 42000, emi: 3799.0, annualROI: 89.0771 },
+  },
+  "L3 Battery": {
+    12: { loan: 65000, emi: 6499.0, annualROI: 35.043 },
+    18: { loan: 65000, emi: 4499.0, annualROI: 29.09 },
+    24: { loan: 65000, emi: 3799.0, annualROI: 34.862 },
+  },
+  "L5 Battery": {
+    12: { loan: 70000, emi: 8984.11, annualROI: 50.0 },
+    18: { loan: 85000, emi: 6447.24, annualROI: 45.0 },
+    24: { loan: 100000, emi: 5845.93, annualROI: 40.0 },
+  },
 };
+const tenureOptions = [12, 18, 24];
+
+// A helper component for the number animation
+const AnimatedNumber = ({ value }) => {
+  const [currentValue, setCurrentValue] = useState(0);
+  const prevValueRef = useRef(0);
+
+  useEffect(() => {
+    const animationDuration = 500; // ms
+    let startTime;
+    const startValue = prevValueRef.current;
+    const endValue = value;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / animationDuration, 1);
+      const animatedValue = startValue + (endValue - startValue) * progress;
+      setCurrentValue(animatedValue);
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        prevValueRef.current = endValue;
+      }
+    };
+    requestAnimationFrame(animate);
+
+    return () => (prevValueRef.current = value);
+  }, [value]);
+
+  return <span>{currentValue.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>;
+};
+
 
 export default function Leasing() {
   const [selectedProduct, setSelectedProduct] = useState("L2 Battery");
-  const [months, setMonths] = useState(1);
+  const [selectedTenure, setSelectedTenure] = useState(24);
+  const navigate = useNavigate();
+  const [schedule, setSchedule] = useState([]);
+
+  const planDetails = leasingData[selectedProduct]?.[selectedTenure] || { loan: 0, emi: 0, annualROI: 0 };
+
+  useEffect(() => {
+    // Amortization schedule calculation
+    if (!planDetails || planDetails.loan === 0) {
+      setSchedule([]);
+      return;
+    }
+    const newSchedule = [];
+    let balance = planDetails.loan;
+    const monthlyRate = planDetails.annualROI / 100 / 12;
+    for (let i = 1; i <= selectedTenure; i++) {
+      const interestPayment = balance * monthlyRate;
+      const principalPayment = planDetails.emi - interestPayment;
+      balance -= principalPayment;
+      newSchedule.push({
+        paymentNumber: i,
+        installment: planDetails.emi,
+        balance: balance > 0 ? balance : 0,
+      });
+    }
+    setSchedule(newSchedule);
+  }, [selectedProduct, selectedTenure, planDetails]);
 
   const handleProductChange = (e) => setSelectedProduct(e.target.value);
-  const handleMonthChange = (e) => setMonths(e.target.value);
-
-  const estimatedPrice = pricing[selectedProduct]?.monthly * months;
+  const handleTenureSliderChange = (e) => {
+    const index = parseInt(e.target.value, 10);
+    setSelectedTenure(tenureOptions[index]);
+  };
 
   return (
-    <div className="leasing-page">
-      <h1>Leasing with <span className="highlight">Urja Mobility</span></h1>
-      <p className="description">
-        Leasing is a smart, flexible, and affordable way to access high-performance EV batteries 
-        without the burden of upfront costs. At Urja Mobility, we offer tailored leasing plans 
-        so that you can drive clean, save money, and stay powered up — your way.
-      </p>
-
-      <div className="how-it-works">
-        <h2>Why Lease?</h2>
-        <ul>
-          <li>✅ No large upfront investment</li>
-          <li>✅ Regular upgrades and replacements</li>
-          <li>✅ Hassle-free maintenance</li>
-          <li>✅ Ideal for individuals, fleet owners & franchisees</li>
-        </ul>
-
-        <h2>How It Works</h2>
-        <ol>
-          <li>1. Choose your battery (L2, L3, or L5)</li>
-          <li>2. Select your leasing duration</li>
-          <li>3. Submit your request — we handle the rest</li>
-        </ol>
-      </div>
-
-      <div className="plans-section">
-        <div className="plan-card">
-          <h3>L2 Battery</h3>
-          <ul>
-            <li>Monthly: ₹1,500</li>
-            <li>3 Months: ₹4,200</li>
-            <li>6 Months: ₹8,000</li>
-            <li>12 Months: ₹15,000</li>
-          </ul>
-        </div>
-
-        <div className="plan-card">
-          <h3>L3 Battery</h3>
-          <ul>
-            <li>Monthly: ₹2,500</li>
-            <li>3 Months: ₹7,000</li>
-            <li>6 Months: ₹13,500</li>
-            <li>12 Months: ₹25,000</li>
-          </ul>
-        </div>
-
-        <div className="plan-card">
-          <h3>L5 Battery</h3>
-          <ul>
-            <li>Monthly: ₹3,500</li>
-            <li>3 Months: ₹9,800</li>
-            <li>6 Months: ₹19,000</li>
-            <li>12 Months: ₹36,000</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="calculator">
-        <h2>Leasing Calculator</h2>
-        <label>
-          Choose Product:
-          <select value={selectedProduct} onChange={handleProductChange}>
-            <option value="L2 Battery">L2 Battery</option>
-            <option value="L3 Battery">L3 Battery</option>
-            <option value="L5 Battery">L5 Battery</option>
-          </select>
-        </label>
-
-        <label>
-          Number of Months:
-          <input
-            type="number"
-            min="1"
-            value={months}
-            onChange={handleMonthChange}
-          />
-        </label>
-
-        <p className="result">
-          Estimated Lease Price: ₹{estimatedPrice?.toLocaleString()}
+    <div className="leasing-page interactive-leasing">
+      <div className="leasing-intro-text">
+        <h1>Leasing Calculator</h1>
+        <p className="description">
+          An interactive tool to explore our flexible and affordable leasing plans.
+          Select a product and adjust the tenure to see your fixed monthly payment and schedule.
         </p>
+      </div>
+
+      <div className="leasing-ui-wrapper">
+        <div className="leasing-calculator professional-card">
+          <h2>Plan Details</h2>
+          <div className="calculator-box">
+            <div className="input-group">
+              <label>1. Select Battery Type</label>
+              <select value={selectedProduct} onChange={handleProductChange}>
+                {Object.keys(leasingData).map((product) => (
+                  <option key={product} value={product}>{product}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="input-group">
+              <label>2. Select Tenure</label>
+              <input
+                type="range"
+                min="0"
+                max={tenureOptions.length - 1}
+                step="1"
+                value={tenureOptions.indexOf(selectedTenure)}
+                onChange={handleTenureSliderChange}
+                className="tenure-slider"
+              />
+              <div className="slider-labels">
+                {tenureOptions.map(t => <span key={t}>{t}m</span>)}
+              </div>
+            </div>
+
+            <div className="output-grid">
+              <div className="output-item">
+                <span>Loan Amount</span>
+                <div className="result-value">₹ <AnimatedNumber value={planDetails.loan} /></div>
+              </div>
+              <div className="output-item">
+                <span>Monthly EMI</span>
+                <div className="result-value primary">₹ <AnimatedNumber value={planDetails.emi} /></div>
+              </div>
+            </div>
+            <button className="cta-button" onClick={() => navigate("/#contact")}>
+              Contact Us for a Quote
+            </button>
+          </div>
+        </div>
+
+        {schedule.length > 0 && (
+          <div className="amortization-section professional-card">
+            <h2>Payment Schedule</h2>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Payment</th>
+                    <th>Installment</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {schedule.map((row) => (
+                    <tr key={row.paymentNumber}>
+                      <td>{row.paymentNumber}</td>
+                      <td>₹{row.installment.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                      <td>₹{row.balance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

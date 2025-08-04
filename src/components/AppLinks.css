@@ -1,34 +1,70 @@
-.app-links-section {
-  text-align: center;
-  background: #f5f5f5;
-  padding: 50px 20px;
-  border-top: 2px solid #ff6600;
-  border-bottom: 2px solid #ff6600;
+/* Aurora Theme AppLinks Bar */
+.app-links-bar {
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+  --text-primary: #f5f5f5;
+  --text-secondary: #aab4c8;
+  --card-bg: rgba(22, 22, 34, 0.55);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --card-shadow: rgba(0, 0, 0, 0.2);
+
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 var(--card-shadow);
+  
+  padding: 16px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.app-links-section h2 {
-  color: #333;
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.app-links-section p {
-  color: #666;
-  margin-bottom: 25px;
-}
-
-.app-links {
+.app-links-bar-content {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
-.app-links img {
-  width: 150px;
-  height: auto;
-  transition: transform 0.3s;
+.app-bar-text {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0;
 }
 
-.app-links img:hover {
+.app-bar-text strong {
+    font-weight: 700;
+}
+
+.app-store-icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Styling the SVG components */
+.app-store-icons svg {
+  height: 40px;
+  width: auto; /* Maintain aspect ratio */
+  border-radius: 6px; /* Match the SVG's corner radius */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.app-store-icons a:hover svg {
   transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+  .app-links-bar-content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }

@@ -1,0 +1,81 @@
+/* --- Aurora Theme Modal --- */
+@keyframes popUp {
+  from {
+    transform: translateY(20px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-overlay {
+  /* Design System Variables */
+  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-color: #F57C00;
+  --text-primary: #f5f5ff;
+  --text-secondary: #aab4c8;
+  --card-border: rgba(255, 255, 255, 0.15);
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --solid-dark-bg: #161622; /* A solid, deep navy for high contrast */
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* ✅ FIX: Modal has a solid dark background for high visibility */
+.modal-content {
+  background: var(--solid-dark-bg);
+  padding: 40px 30px;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 10px 40px var(--card-shadow);
+  animation: popUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  
+  /* ✅ FIX: Ensures any text inside the modal is light by default */
+  color: var(--text-primary);
+  border: 1px solid var(--card-border);
+}
+
+/* ✅ FIX: Close button is now visible and themed */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--primary-color);
+  transform: rotate(90deg);
+}
+
+/* --- Default styles for content inside the modal --- */
+.modal-content h2,
+.modal-content h3 {
+    color: var(--primary-color);
+}
+.modal-content p {
+    color: var(--text-secondary);
+}

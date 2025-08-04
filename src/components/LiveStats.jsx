@@ -17,9 +17,10 @@ export default function LiveStats() {
 
     const counterInterval = setInterval(() => {
       currentStep++;
-      setKmRun(Math.floor((kmTarget / steps) * currentStep));
-      setDrivers(Math.floor((driverTarget / steps) * currentStep));
-      setBatteries(Math.floor((batteryTarget / steps) * currentStep));
+      const easeOut = 1 - Math.pow(1 - (currentStep / steps), 3);
+      setKmRun(Math.floor(kmTarget * easeOut));
+      setDrivers(Math.floor(driverTarget * easeOut));
+      setBatteries(Math.floor(batteryTarget * easeOut));
 
       if (currentStep >= steps) clearInterval(counterInterval);
     }, interval);
@@ -28,18 +29,19 @@ export default function LiveStats() {
   }, []);
 
   return (
-    <div className="live-stats">
+    <div className="live-stats-wrapper">
+      <div className="stats-header">Live Network Stats</div>
       <div className="stats-item">
         <span>KMs Run:</span>
-        <strong>{kmRun}</strong>
+        <strong>{kmRun.toLocaleString('en-IN')}</strong>
       </div>
       <div className="stats-item">
         <span>Drivers:</span>
-        <strong>{drivers}</strong>
+        <strong>{drivers.toLocaleString('en-IN')}</strong>
       </div>
       <div className="stats-item">
         <span>Batteries:</span>
-        <strong>{batteries}</strong>
+        <strong>{batteries.toLocaleString('en-IN')}</strong>
       </div>
     </div>
   );
