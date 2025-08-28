@@ -1,4 +1,3 @@
-/* --- Keyframes & Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap');
 
 @keyframes aurora-float {
@@ -21,7 +20,6 @@
 .shape-1 { width: 500px; height: 500px; top: -150px; left: -150px; background-color: #ffc107; }
 .shape-2 { width: 450px; height: 450px; bottom: -100px; right: -100px; background-color: #ff8c00; animation-delay: 5s; }
 
-
 /* --- Main Section --- */
 .franchise-section {
   padding: 80px 20px;
@@ -31,7 +29,6 @@
   position: relative;
   overflow: hidden;
 }
-
 .franchise-wrapper {
   max-width: 1000px;
   margin: 0 auto;
@@ -39,20 +36,18 @@
   z-index: 2;
 }
 
-/* --- Intro Section (Replaces Grid) --- */
+/* --- Intro --- */
 .franchise-intro {
   text-align: center;
   max-width: 800px;
   margin: 0 auto 80px;
 }
-
 .franchise-intro h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 2.8rem;
   color: #2d3748;
   margin-bottom: 20px;
 }
-
 .franchise-intro p {
   font-size: 1.1rem;
   line-height: 1.7;
@@ -60,7 +55,7 @@
   color: #5a6a85;
 }
 
-/* --- Themed CTA Button --- */
+/* --- CTA Button --- */
 .cta-btn {
   background: #F57C00;
   color: white;
@@ -74,13 +69,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(245, 124, 0, 0.3);
 }
-
 .cta-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 20px rgba(245, 124, 0, 0.4);
 }
 
-/* --- Themed Accordion --- */
+/* --- Accordion --- */
 .franchise-accordion {
   max-width: 900px;
   margin: 0 auto 80px;
@@ -91,68 +85,24 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
   padding: 15px 30px;
 }
-
-.accordion-item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-.accordion-item:last-child {
-  border-bottom: none;
-}
-
+.accordion-item { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+.accordion-item:last-child { border-bottom: none; }
 .accordion-header {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.25rem;
-  color: #2d3748;
-  margin: 0;
-  padding: 20px 0;
+  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Poppins', sans-serif; font-size: 1.25rem;
+  color: #2d3748; margin: 0; padding: 20px 0;
 }
-.accordion-header span {
-  color: #F57C00;
-  font-size: 1rem;
-}
-
+.accordion-header span { color: #F57C00; font-size: 1rem; }
 .accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
 }
+.accordion-content.open { max-height: 500px; }
+.accordion-content-inner { padding: 0 0 20px; }
+.accordion-content ul { padding-left: 5px; margin: 0; list-style: none; color: #5a6a85; line-height: 1.8; }
+.accordion-content li { margin-bottom: 12px; font-size: 1rem; padding-left: 25px; position: relative; }
+.accordion-content li::before { content: '✓'; position: absolute; left: 0; color: #F57C00; font-weight: bold; }
 
-.accordion-content.open {
-  max-height: 500px;
-}
-
-.accordion-content-inner {
-  padding: 0 0 20px;
-}
-
-.accordion-content ul {
-  padding-left: 5px;
-  margin: 0;
-  list-style: none;
-  color: #5a6a85;
-  line-height: 1.8;
-}
-
-.accordion-content li {
-  margin-bottom: 12px;
-  font-size: 1rem;
-  padding-left: 25px;
-  position: relative;
-}
-.accordion-content li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: #F57C00;
-  font-weight: bold;
-}
-
-
-/* --- Final CTA Section --- */
+/* --- Final CTA --- */
 .franchise-cta {
   background: rgba(255, 240, 224, 0.5);
   backdrop-filter: blur(5px);
@@ -163,14 +113,12 @@
   max-width: 800px;
   text-align: center;
 }
-
 .franchise-cta h3 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.8rem;
   color: #2d3748;
   margin-bottom: 10px;
 }
-
 .franchise-cta p {
   font-size: 1rem;
   color: #5a6a85;
@@ -181,12 +129,24 @@
   margin-right: auto;
 }
 
-/* --- Responsive --- */
+/* --- Badge Below Button --- */
+.franchise-cta-badge {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.playstore-link svg {
+  width: 110px; /* smaller badge */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.playstore-link:hover svg {
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
-  .franchise-intro h2 {
-    font-size: 2.2rem;
-  }
-  .accordion-header {
-    font-size: 1.1rem;
-  }
+  .franchise-intro h2 { font-size: 2.2rem; }
+  .accordion-header { font-size: 1.1rem; }
+  .playstore-link svg { width: 95px; }
 }

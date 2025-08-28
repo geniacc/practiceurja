@@ -1,17 +1,21 @@
-/* --- ✅ ADDITION: Keyframes for the animated tint --- */
+/* --- Keyframes for Animations --- */
 @keyframes aurora-float {
   0% { transform: translate(0, 0); }
   50% { transform: translate(30px, -40px); }
   100% { transform: translate(0, 0); }
 }
 
-/* --- Original Keyframes --- */
 @keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -23,7 +27,7 @@
   }
 }
 
-/* --- ✅ ADDITION: Aurora Background Styles --- */
+/* --- Aurora Background Styles --- */
 .aurora-bg {
   position: absolute;
   top: 0;
@@ -45,16 +49,16 @@
 .shape-3 { width: 300px; height: 300px; bottom: 5%; left: 20%; background-color: #ffdab9; animation-delay: 8s; }
 
 
-/* --- ✅ MODIFICATION: Main Section Wrapper --- */
+/* --- Main Section Wrapper --- */
 .products-section {
   padding: 60px 20px;
   background: transparent;
   text-align: center;
-  position: relative; /* Necessary for positioning the background */
-  overflow: hidden;   /* Contains the blurred shapes */
+  position: relative;
+  overflow: hidden;
 }
 
-/* --- ✅ MODIFICATION: Content Wrapper --- */
+/* --- Content Wrapper --- */
 .products-wrapper {
   max-width: 1000px;
   margin: 0 auto;
@@ -62,7 +66,7 @@
   background-color: transparent;
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  position: relative; /* Ensures content is on top of the tint */
+  position: relative;
   z-index: 2;
 }
 
@@ -78,11 +82,11 @@
   margin-bottom: 40px;
 }
 
-/* Product Intro */
+/* --- Product Intro --- */
 .product-intro {
   margin: 0 auto 60px;
   padding: 30px;
-  background: rgba(245, 245, 245, 0.8); /* Slight transparency to hint at bg */
+  background: rgba(245, 245, 245, 0.8);
   backdrop-filter: blur(5px);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -112,7 +116,7 @@
 
 .feature-list {
   text-align: left;
-  list-style: none; /* Removed disc for custom icon */
+  list-style: none;
   margin: 0 auto;
   max-width: 700px;
   padding-left: 0;
@@ -124,10 +128,9 @@
   font-size: 15px;
   line-height: 1.6;
   position: relative;
-  padding-left: 25px; /* Space for custom icon */
+  padding-left: 25px;
 }
 
-/* ✅ ADDITION: Custom bullet point for features */
 .feature-list li::before {
   content: '✓';
   position: absolute;
@@ -137,7 +140,7 @@
 }
 
 
-/* Product Cards */
+/* --- Product Cards --- */
 .products-container {
   display: flex;
   flex-wrap: wrap;
@@ -186,7 +189,7 @@
   backface-visibility: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
@@ -225,43 +228,115 @@
   background: rgba(247, 247, 247, 0.9);
 }
 
+/* --- ✅ UPDATED: Professional Flip Card Prompt --- */
+.flip-prompt {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.7); /* Lighter background */
+  backdrop-filter: blur(4px); /* Glassmorphism effect */
+  color: #333; /* Darker text for readability */
+  padding: 6px 14px;
+  border-radius: 8px; /* Match button corner radius */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.flip-card:hover .flip-prompt {
+  opacity: 0;
+}
+
+.flip-icon {
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.6s ease;
+}
+
+.flip-card:hover .flip-icon {
+  transform: rotate(360deg);
+}
+
+
+/* --- Professional & Cool Button Styles --- */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 1rem;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 1rem;
+  width: 100%;
+  align-items: center;
 }
 
-.learn-more,
-.download-btn {
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
+/* --- ✅ ADDED: Rule to remove link underlines --- */
+.button-group a {
+  text-decoration: none;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  background-color: #ff8c00;
-  width: 180px;
+  letter-spacing: 0.5px;
 }
 
-.download-btn {
-  background-color: #6c757d;
+.btn .btn-icon {
+  transition: transform 0.3s ease;
 }
 
-.learn-more:hover {
-  background-color: #e67600;
-  transform: scale(1.05);
+.btn.btn-primary {
+  background-image: linear-gradient(45deg, #ff8c00 0%, #ffc107 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
 }
 
-.download-btn:hover {
-  background-color: #5a6268;
-  transform: scale(1.05);
+.btn.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(255, 165, 0, 0.3);
 }
 
-/* Modal */
+.btn.btn-primary:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+.btn.btn-secondary {
+  background-color: transparent;
+  color: #555;
+  border-color: #ddd;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #f8f9fa;
+  border-color: #ff8c00;
+  color: #ff8c00;
+}
+
+.btn.btn-secondary:hover .btn-icon {
+  transform: translateY(2px);
+}
+
+
+/* --- Modal --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -312,7 +387,7 @@
   cursor: pointer;
 }
 
-/* Leasing CTA */
+/* --- Leasing CTA --- */
 .leasing-cta {
   margin-top: 60px;
   background: rgba(248, 248, 248, 0.8);
@@ -355,7 +430,7 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .products-container {
     gap: 20px;

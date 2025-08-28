@@ -42,7 +42,7 @@ export default function AppLinks() {
           📱 <strong>Get the Urja Mobility App</strong>
         </p>
         <div className="app-store-icons">
-          <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">
+          <a href="https://play.google.com/store/apps/details?id=com.urjaMobilityPartners" target="_blank" rel="noopener noreferrer">
             <PlayStoreBadge />
           </a>
           <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer">

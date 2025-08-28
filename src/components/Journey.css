@@ -168,7 +168,7 @@
 .roadmap-list li:nth-child(2)::before { content: '🌐'; }
 .roadmap-list li:nth-child(3)::before { content: '🌱'; }
 
-/* === ✅ UPGRADED "HOW IT WORKS" STYLES === */
+/* How It Works */
 .how-it-works-steps { 
   list-style: none; 
   padding: 0; 
@@ -186,6 +186,7 @@
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.05);
 }
+
 .step-number {
   flex-shrink: 0;
   width: 35px;
@@ -199,26 +200,23 @@
   font-weight: 700;
   font-size: 1rem;
 }
+
 .step-text {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
-.step-text strong {
-  color: #1a202c;
-  font-weight: 700;
-}
-.step-text span {
-  font-size: 0.9rem;
-  color: #4a5568;
-}
+.step-text strong { color: #1a202c; font-weight: 700; }
+.step-text span { font-size: 0.9rem; color: #4a5568; }
 
+/* Reviews */
 .review-cards { display: flex; flex-direction: column; gap: 20px; }
 .review-card { display: flex; align-items: center; gap: 15px; }
 .review-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
 .review-text { font-style: italic; color: #4a5568; margin: 0 0 5px 0; font-size: 0.95rem; }
 .review-author { font-weight: 600; color: #1a202c; font-size: 0.9rem; }
 
+/* CTA Box */
 .cta-summary-box {
   background: white;
   padding: 40px;
@@ -229,24 +227,48 @@
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
 }
 
-.cta-button {
+/* Big "Start Your Journey" button */
+.journey-section .cta-button {
+  padding: 14px 150px;   /* Desktop large button */
+  font-size: 1rem;
+  border-radius: 45px;
+  width: auto;
+  min-width: unset;
+  white-space: nowrap;
+  font-weight: 700;
   background: #ff8c00;
   color: white;
   border: none;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
 }
-.cta-button:hover {
+
+.journey-section .cta-button:hover {
   background: #e67600;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
 }
 
+/* Play Store badge below button */
+.journey-section .cta-badge {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.journey-section .cta-badge svg {
+  width: 130px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.journey-section .cta-badge:hover svg {
+  transform: scale(1.05);
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .journey-header h2 { font-size: 2.5rem; }
   .timeline-item, .timeline-item:nth-child(even) {
@@ -260,4 +282,10 @@
     transition-delay: 0s !important;
   }
   .aurora-shape { filter: blur(100px); }
+
+  /* Slightly smaller button on mobile */
+  .journey-section .cta-button {
+    padding: 12px 60px;
+    font-size: 0.95rem;
+  }
 }

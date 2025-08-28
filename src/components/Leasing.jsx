@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Leasing.css";
 
-// Data is kept inside the component as requested
-const leasingData = {
+// ✅ Exported so other files (like ProductDetail) can import it
+export const leasingData = {
   "L2 Battery": {
     12: { loan: 42000, emi: 6499.0, annualROI: 133.16 },
     18: { loan: 42000, emi: 4499.0, annualROI: 96.677 },
@@ -20,15 +20,16 @@ const leasingData = {
     24: { loan: 100000, emi: 5845.93, annualROI: 40.0 },
   },
 };
+
 const tenureOptions = [12, 18, 24];
 
-// A helper component for the number animation
+// Number animation helper stays the same
 const AnimatedNumber = ({ value }) => {
   const [currentValue, setCurrentValue] = useState(0);
   const prevValueRef = useRef(0);
 
   useEffect(() => {
-    const animationDuration = 500; // ms
+    const animationDuration = 500;
     let startTime;
     const startValue = prevValueRef.current;
     const endValue = value;
@@ -49,9 +50,15 @@ const AnimatedNumber = ({ value }) => {
     return () => (prevValueRef.current = value);
   }, [value]);
 
-  return <span>{currentValue.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</span>;
+  return (
+    <span>
+      {currentValue.toLocaleString("en-IN", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      })}
+    </span>
+  );
 };
-
 
 export default function Leasing() {
   const [selectedProduct, setSelectedProduct] = useState("L2 Battery");
@@ -59,10 +66,14 @@ export default function Leasing() {
   const navigate = useNavigate();
   const [schedule, setSchedule] = useState([]);
 
-  const planDetails = leasingData[selectedProduct]?.[selectedTenure] || { loan: 0, emi: 0, annualROI: 0 };
+  const planDetails =
+    leasingData[selectedProduct]?.[selectedTenure] || {
+      loan: 0,
+      emi: 0,
+      annualROI: 0,
+    };
 
   useEffect(() => {
-    // Amortization schedule calculation
     if (!planDetails || planDetails.loan === 0) {
       setSchedule([]);
       return;
@@ -94,8 +105,9 @@ export default function Leasing() {
       <div className="leasing-intro-text">
         <h1>Leasing Calculator</h1>
         <p className="description">
-          An interactive tool to explore our flexible and affordable leasing plans.
-          Select a product and adjust the tenure to see your fixed monthly payment and schedule.
+          An interactive tool to explore our flexible and affordable leasing
+          plans. Select a product and adjust the tenure to see your fixed
+          monthly payment and schedule.
         </p>
       </div>
 
@@ -107,7 +119,9 @@ export default function Leasing() {
               <label>1. Select Battery Type</label>
               <select value={selectedProduct} onChange={handleProductChange}>
                 {Object.keys(leasingData).map((product) => (
-                  <option key={product} value={product}>{product}</option>
+                  <option key={product} value={product}>
+                    {product}
+                  </option>
                 ))}
               </select>
             </div>
@@ -124,21 +138,30 @@ export default function Leasing() {
                 className="tenure-slider"
               />
               <div className="slider-labels">
-                {tenureOptions.map(t => <span key={t}>{t}m</span>)}
+                {tenureOptions.map((t) => (
+                  <span key={t}>{t}m</span>
+                ))}
               </div>
             </div>
 
             <div className="output-grid">
               <div className="output-item">
                 <span>Loan Amount</span>
-                <div className="result-value">₹ <AnimatedNumber value={planDetails.loan} /></div>
+                <div className="result-value">
+                  ₹ <AnimatedNumber value={planDetails.loan} />
+                </div>
               </div>
               <div className="output-item">
                 <span>Monthly EMI</span>
-                <div className="result-value primary">₹ <AnimatedNumber value={planDetails.emi} /></div>
+                <div className="result-value primary">
+                  ₹ <AnimatedNumber value={planDetails.emi} />
+                </div>
               </div>
             </div>
-            <button className="cta-button" onClick={() => navigate("/#contact")}>
+            <button
+              className="cta-button"
+              onClick={() => navigate("/#contact")}
+            >
               Contact Us for a Quote
             </button>
           </div>
@@ -160,8 +183,20 @@ export default function Leasing() {
                   {schedule.map((row) => (
                     <tr key={row.paymentNumber}>
                       <td>{row.paymentNumber}</td>
-                      <td>₹{row.installment.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                      <td>₹{row.balance.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                      <td>
+                        ₹
+                        {row.installment.toLocaleString("en-IN", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </td>
+                      <td>
+                        ₹
+                        {row.balance.toLocaleString("en-IN", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

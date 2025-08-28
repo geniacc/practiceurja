@@ -16,20 +16,18 @@ import Policies from "./components/Policies.jsx";
 import InformationSecurity from "./components/InformationSecurity.jsx";
 import MediaPolicy from "./components/MediaPolicy.jsx";
 import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
-// ✅ REMOVED ReturnRefund import
-// import ReturnRefund from "./components/ReturnRefund.jsx";
-// ✅ ADDED two new imports
 import ReturnPolicy from "./components/ReturnPolicy.jsx";
 import RefundPolicy from "./components/RefundPolicy.jsx";
 import RiskManagement from "./components/RiskManagement.jsx";
 import SocialMedia from "./components/SocialMedia.jsx";
-// ✅ REMOVED StaffLoan import
-// import StaffLoan from "./components/StaffLoan.jsx";
 import TermsConditions from "./components/TermsConditions.jsx";
 import FranchiseForm from "./components/FranchiseForm.jsx";
 import Association from "./components/Association.jsx";
 import CarCursor from "./components/CarCursor";
 import AnimatedCanvasBackground from "./components/AnimatedCanvasBackground";
+
+// ✅ Import the new product detail page
+import ProductDetail from "./components/ProductDetail.jsx";
 
 function ScrollToHash() {
   const location = useLocation();
@@ -50,12 +48,12 @@ export default function App() {
     <Router>
       <AnimatedCanvasBackground />
       <Navbar />
-      
+
+      {/* For navbar spacing */}
       <div style={{ height: "55px" }} />
 
       <ScrollToHash />
-
-       <CarCursor />
+      <CarCursor />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -63,25 +61,29 @@ export default function App() {
         <Route path="/leasing" element={<Leasing />} />
         <Route path="/carbon-savings" element={<CarbonSavings />} />
         <Route path="/policies" element={<Policies />} />
-        <Route path="/policies/information-security" element={<InformationSecurity />} />
+        <Route
+          path="/policies/information-security"
+          element={<InformationSecurity />}
+        />
         <Route path="/policies/media" element={<MediaPolicy />} />
         <Route path="/policies/privacy" element={<PrivacyPolicy />} />
-        
-        {/* ✅ REMOVED old return-refund route */}
-        {/* <Route path="/policies/return-refund" element={<ReturnRefund />} /> */}
-        {/* ✅ ADDED two new routes */}
+
+        {/* Return & Refund Policies */}
         <Route path="/policies/return" element={<ReturnPolicy />} />
         <Route path="/policies/refund" element={<RefundPolicy />} />
-        
+
         <Route path="/policies/risk-management" element={<RiskManagement />} />
         <Route path="/policies/social-media" element={<SocialMedia />} />
-        
-        {/* ✅ REMOVED old staff-loan route */}
-        {/* <Route path="/policies/staff-loan" element={<StaffLoan />} /> */}
-        
-        <Route path="/policies/terms-conditions" element={<TermsConditions />} />
+
+        <Route
+          path="/policies/terms-conditions"
+          element={<TermsConditions />}
+        />
         <Route path="/franchise-inquiry" element={<FranchiseForm />} />
         <Route path="/association" element={<Association />} />
+
+        {/* ✅ New Product Detail Route */}
+        <Route path="/products/:productId" element={<ProductDetail />} />
       </Routes>
 
       <Footer />

@@ -4,8 +4,54 @@ import "./Franchise.css";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 export default function Franchise() {
-  const [openSection, setOpenSection] = useState(0); // Default to first section open
+  const [openSection, setOpenSection] = useState(0); // First section open by default
   const navigate = useNavigate();
+
+  // ✅ Play Store Badge - inline so self-contained
+  const PlayStoreBadge = () => (
+    <svg
+      width="135"
+      height="40"
+      viewBox="0 0 135 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="135" height="40" rx="6" fill="white" />
+      <path d="M13.81 20L5.33 11.52V28.48L13.81 20Z" fill="#99A93A" />
+      <path
+        d="M16.48 17.33L13.81 20L16.48 22.67L26.33 12.82L16.48 17.33Z"
+        fill="#FBC02D"
+      />
+      <path
+        d="M26.33 27.18L16.48 22.67L13.81 20L5.33 28.48C6.55 29.7 8.32 30.13 10.05 29.4L26.33 27.18Z"
+        fill="#EA4335"
+      />
+      <path
+        d="M26.33 12.82L10.05 10.6C8.32 9.87 6.55 10.3 5.33 11.52L13.81 20L26.33 12.82Z"
+        fill="#4285F4"
+      />
+      <g fill="black">
+        <text
+          x="37"
+          y="19"
+          fontFamily="Arial, sans-serif"
+          fontSize="6"
+          fontWeight="bold"
+        >
+          GET IT ON
+        </text>
+        <text
+          x="37"
+          y="30"
+          fontFamily="Arial, sans-serif"
+          fontSize="11"
+          fontWeight="bold"
+        >
+          Google Play
+        </text>
+      </g>
+    </svg>
+  );
 
   const toggleSection = (index) => {
     setOpenSection(openSection === index ? null : index);
@@ -73,13 +119,20 @@ export default function Franchise() {
         <div className="franchise-accordion">
           {sections.map((section, index) => (
             <div className="accordion-item" key={index}>
-              <h3 className="accordion-header" onClick={() => toggleSection(index)}>
+              <h3
+                className="accordion-header"
+                onClick={() => toggleSection(index)}
+              >
                 {section.title}
                 <span>
                   {openSection === index ? <FaChevronUp /> : <FaChevronDown />}
                 </span>
               </h3>
-              <div className={`accordion-content ${openSection === index ? "open" : ""}`}>
+              <div
+                className={`accordion-content ${
+                  openSection === index ? "open" : ""
+                }`}
+              >
                 <div className="accordion-content-inner">
                   <ul>
                     {section.content.map((item, i) => (
@@ -92,15 +145,28 @@ export default function Franchise() {
           ))}
         </div>
 
+        {/* ✅ Final CTA with Play Store below button */}
         <div className="franchise-cta">
           <h3>Ready to Start?</h3>
           <p>
-            Take the first step toward business ownership. Fill out our inquiry form
-            or reach out to our franchise team — let’s grow together!
+            Take the first step toward business ownership. Fill out our inquiry
+            form or reach out to our franchise team — let’s grow together!
           </p>
           <button className="cta-btn" onClick={handleInquiry}>
             🚀 Start Your Franchise Inquiry
           </button>
+
+          {/* Play Store Badge BELOW button */}
+          <div className="franchise-cta-badge">
+            <a
+              className="playstore-link"
+              href="https://play.google.com/store/apps/details?id=com.urjaMobilityPartners"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <PlayStoreBadge />
+            </a>
+          </div>
         </div>
       </div>
     </section>
