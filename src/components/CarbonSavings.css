@@ -1,165 +1,167 @@
-/* --- Animation Keyframes --- */
-@keyframes aurora-pan {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Aurora background container (same as Careers) */
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  animation: fadeInUp 1.5s ease forwards;
 }
 
-/* --- Main Page Wrapper --- */
+/* Aurora shapes with blur and orange/purple colors */
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.2;
+  will-change: transform;
+  animation: aurora-float 22s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  left: -150px;
+  background-color: #ffd700; /* Gold */
+}
+.shape-2 {
+  width: 450px;
+  height: 450px;
+  top: 20%;
+  right: -100px;
+  background-color: #ff8c00; /* Dark Orange */
+  animation-delay: 3s;
+}
+.shape-3 {
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  left: 25%;
+  background-color: #e0bbe4; /* Light Purple */
+  animation-delay: 6s;
+}
+
+/* Aurora float animation */
+@keyframes aurora-float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 60px); }
+}
+
+/* Main CarbonSavings page container */
 .carbon-savings-page {
-  /* Design System Variables */
-  --primary-glow: rgba(245, 124, 0, 0.5);
+  --primary-glow: rgba(245, 124, 0, 0.4);
   --primary-color: #F57C00;
-  --text-primary: #f5f5f5;
-  --text-secondary: #aab4c8;
-  --card-bg: rgba(22, 22, 34, 0.6);
-  --card-border: rgba(255, 255, 255, 0.15);
-  --card-shadow: rgba(0, 0, 0, 0.2);
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --card-shadow: rgba(0, 0, 0, 0.1);
 
+  position: relative;
   min-height: 100vh;
   padding: 100px 20px;
-  
-  /* Applying the Aurora Background */
-  background: linear-gradient(125deg, #020024, #1d1d42, #5a2a53, #b45f4a);
-  background-size: 400% 400%;
-  animation: aurora-pan 20s ease infinite alternate;
+  background: transparent; /* keep transparent so aurora is visible */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
+/* Content wrapper above aurora */
 .carbon-savings-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
+/* Page header styling */
 .page-header {
-    text-align: center;
-    margin-bottom: 60px;
-    animation: fadeInUp 0.6s ease-out;
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInUp 0.6s ease forwards;
 }
 .page-header h2 {
-    font-size: 3rem;
-    color: var(--text-primary);
-    margin-bottom: 15px;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 .page-header p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
 }
 
-/* --- Glassmorphism Content Cards --- */
-.live-counter, .calculator-box, .info-section {
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 32px 0 var(--card-shadow);
-    margin-bottom: 30px;
-    animation: fadeInUp 0.8s ease-out;
+/* Glassmorphism card style same as Careers */
+.live-counter,
+.calculator-box,
+.info-section {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  padding: 35px;
+  box-shadow: 0 0 25px 0 var(--primary-glow);
+  margin-bottom: 30px;
+  color: var(--text-primary);
+  animation: fadeInUp 0.8s ease-out;
+  transition: box-shadow 0.3s ease;
 }
 
 .live-counter {
-    text-align: center;
-    font-size: 1.2rem;
-    color: var(--text-primary);
-    animation-delay: 0.2s;
-}
-.highlight {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--primary-glow);
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-shadow: 0 0 6px var(--primary-color);
+  animation-delay: 0.2s;
 }
 
-.calculator-box {
-    animation-delay: 0.4s;
+.live-counter .highlight {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 15px var(--primary-color);
 }
+
+/* Calculator styling */
 .calculator-box h3 {
-    font-size: 1.8rem;
-    color: var(--text-primary);
-    margin: 0 0 20px 0;
-    text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: center;
 }
 .calculator-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
-
 .calculator-box input[type="number"] {
-  padding: 12px 15px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 50px;
   border: 1px solid var(--card-border);
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   font-size: 1rem;
-  background-color: rgba(0,0,0,0.2);
+  background-color: white;
   color: var(--text-primary);
   transition: all 0.3s ease;
+  box-shadow: inset 1px 1px 5px rgba(0,0,0,0.05);
 }
-.calculator-box input[type="number"]::placeholder { color: var(--text-secondary); }
-.calculator-box input[type="number"]:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 10px var(--primary-glow);
-}
-
-.savings-result {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-}
-.savings-result strong {
-    color: var(--text-primary);
-}
-
-.info-section {
-    text-align: left;
-    animation-delay: 0.6s;
-}
-.info-section h3, .info-section h4 {
-    color: var(--primary-color);
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-.info-section h3 { font-size: 1.5rem; }
-.info-section h4 { font-size: 1.2rem; }
-
-.info-section ul {
-  list-style: none;
-  padding-left: 0;
-  line-height: 1.8;
+.calculator-box input[type="number"]::placeholder {
   color: var(--text-secondary);
 }
-.info-section li { margin-bottom: 10px; }
-
-
-/* --- Unified Button Style --- */
-.button-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--primary-glow);
+.calculator-box input[type="number"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-glow);
+  background-color: #fffaf3;
+  outline: none;
 }
-.button-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px var(--primary-glow);
-}
+
+/* Apply button styling consistent with

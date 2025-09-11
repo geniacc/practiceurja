@@ -1,15 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Products.css";
 
 // Assuming images are in src/assets/
 import batteryImg from "../assets/battery-product.jpg";
+import l1Img from "../assets/l1.jpg";
 import l2Img from "../assets/l2.jpg";
 import l3Img from "../assets/l3.jpg";
+import l4Img from "../assets/l4.jpg";
 import l5Img from "../assets/l5.jpg";
 
-// Product data has been simplified for public view.
+// The full product data array
 export const batteryOptions = [
+  {
+    name: "L1 Battery",
+    img: l1Img,
+    specs: "48V | 60Ah | 2.88kWh",
+    desc: "Ultra-lightweight and compact, perfect for personal e-bikes and scooters needing agility and efficiency.",
+    details:
+      "The ideal power solution for personal mobility, offering 2.88kWh in a lightweight frame with LFP safety and an IP67 rating.",
+    brochure: "/brochures/l1-brochure.pdf",
+    specifications: {
+      "Total Capacity": "2.88 kWh",
+      Chemistry: "LFP (LiFePO4)",
+      "IP Rating": "IP67",
+      Weight: "Approx. 28 kg",
+      "Dimensions (L x W x H)": "350 x 280 x 250 mm",
+      Application: "E-Bikes, Personal Scooters",
+    },
+    features: [
+      "Extremely Lightweight Design",
+      "Compact Form Factor",
+      "CAN-Based Communication",
+      "Safe LFP Chemistry",
+      "IP67 Protection",
+      "Smart BMS Safety Features",
+    ],
+    warrantyInfo:
+      "Supplied with a 2-year manufacturer warranty covering performance and defects.",
+    faq: [
+      {
+        question: "Is the L1 easy to carry?",
+        answer:
+          "Yes, at approximately 28 kg, it is one of our lightest batteries, designed for portability and easy handling.",
+      },
+      {
+        question: "What is the primary use case for the L1?",
+        answer: "It is designed for personal e-bikes and city scooters where weight and size are critical.",
+      },
+    ],
+  },
   {
     name: "L2 Battery",
     img: l2Img,
@@ -89,6 +129,44 @@ export const batteryOptions = [
     ],
   },
   {
+    name: "L4 Battery",
+    img: l4Img,
+    specs: "51.2V | 180Ah | 9.2kWh",
+    desc: "A premium solution for high-performance e-rickshaws, providing extended range and durability for demanding routes.",
+    details:
+      "Engineered for high-endurance commercial use, this 9.2kWh battery offers a blend of high capacity and rugged construction.",
+    brochure: "/brochures/l4-brochure.pdf",
+    specifications: {
+      "Total Capacity": "9.2 kWh",
+      Chemistry: "LFP (LiFePO4)",
+      "IP Rating": "IP67",
+      Weight: "Approx. 85 kg",
+      "Dimensions (L x W x H)": "610 x 450 x 275 mm",
+      Application: "Premium E-Rickshaws, Passenger EVs",
+    },
+    features: [
+      "Extended Range Capability",
+      "Robust for Daily Commercial Use",
+      "Advanced Thermal Management",
+      "CAN Diagnostics",
+      "High-Cycle LFP Cells",
+      "Reinforced MS Enclosure",
+    ],
+    warrantyInfo:
+      "Comes with a 3-year warranty covering all manufacturing defects and major electrical failures.",
+    faq: [
+      {
+        question: "What makes the L4 a 'premium' choice?",
+        answer:
+          "The L4 uses higher-density cells for extended range and includes advanced thermal management, making it ideal for continuous, heavy-duty operation.",
+      },
+      {
+        question: "Can it be used in passenger e-rickshaws?",
+        answer: "Yes, it is an excellent choice for passenger vehicles that require longer range and reliability.",
+      },
+    ],
+  },
+  {
     name: "L5 Battery",
     img: l5Img,
     specs: "51.2V | 200Ah | 10.24kWh",
@@ -130,11 +208,29 @@ export const batteryOptions = [
   },
 ];
 
-
-// Helper to convert product name to URL-safe id string, e.g. "L2 Battery" -> "l2-battery"
 const makeId = (name) => name.toLowerCase().replace(/\s+/g, "-");
 
 export default function Products() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // CONFIG: Number of items to show at once on desktop.
+  const visibleItems = 3;
+
+  // UPDATED LOGIC: Stops the slider at the beginning.
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  // UPDATED LOGIC: Stops the slider at the end.
+  const goToNext = () => {
+    const maxIndex = batteryOptions.length - visibleItems;
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
+  };
+
+  // ADDED: Logic to determine if buttons should be disabled.
+  const canGoPrev = currentIndex > 0;
+  const canGoNext = currentIndex < batteryOptions.length - visibleItems;
+
   return (
     <section className="products-section" id="products">
       <div className="aurora-bg">
@@ -187,48 +283,83 @@ export default function Products() {
 
         <h2>Battery Options for Every Need</h2>
 
-        <div className="products-container">
-          {batteryOptions.map((battery, index) => (
-            <div key={index} className="flip-card">
-              <div className="flip-card-inner">
-                <div className="flip-card-front">
-                  <img src={battery.img} alt={battery.name} />
-                  <h3>{battery.name}</h3>
-                  <p>{battery.specs}</p>
+        <div className="product-slider-container">
+          <button
+            onClick={goToPrevious}
+            className="slider-arrow left-arrow"
+            disabled={!canGoPrev}
+          >
+            &#10094;
+          </button>
 
-                  <div className="flip-prompt">
-                    <span className="flip-icon">↻</span>
-                    Hover for Details
+          <div className="slider-viewport">
+            <div
+              className="slider-track"
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (100 / visibleItems)
+                }%)`,
+              }}
+            >
+              {batteryOptions.map((battery, index) => (
+                <div
+                  key={battery.name}
+                  className={`slide-item ${
+                    index >= currentIndex && index < currentIndex + visibleItems
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  <div className="flip-card">
+                    <div className="flip-card-inner">
+                      <div className="flip-card-front">
+                        <img src={battery.img} alt={battery.name} />
+                        <h3>{battery.name}</h3>
+                        <p>{battery.specs}</p>
+                        <div className="flip-prompt">
+                          <span className="flip-icon">↻</span>
+                          Hover for Details
+                        </div>
+                      </div>
+
+                      <div className="flip-card-back">
+                        <h3>{battery.name}</h3>
+                        <p>{battery.desc}</p>
+                        <div className="button-group">
+                          <Link to={`/products/${makeId(battery.name)}`}>
+                            <button className="btn btn-primary">
+                              See More <span className="btn-icon">→</span>
+                            </button>
+                          </Link>
+                          <a
+                            href={battery.brochure}
+                            download
+                            className="btn btn-secondary"
+                            rel="noopener noreferrer"
+                          >
+                            Download <span className="btn-icon">↓</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="flip-card-back">
-                  <h3>{battery.name}</h3>
-                  <p>{battery.desc}</p>
-                  <div className="button-group">
-                    <Link to={`/products/${makeId(battery.name)}`}>
-                      <button className="btn btn-primary">
-                        See More <span className="btn-icon">→</span>
-                      </button>
-                    </Link>
-                    <a
-                      href={battery.brochure}
-                      download
-                      className="btn btn-secondary"
-                      rel="noopener noreferrer"
-                    >
-                      Download <span className="btn-icon">↓</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <button
+            onClick={goToNext}
+            className="slider-arrow right-arrow"
+            disabled={!canGoNext}
+          >
+            &#10095;
+          </button>
         </div>
 
         <div className="leasing-cta">
           <h3>Interested in Leasing?</h3>
-          <p>Explore our flexible leasing plans designed for every EV need.</p>
+          <p>Explore our flexible leasing plans for every EV need.</p>
           <Link to="/leasing">
             <button className="leasing-button">Know More About Leasing</button>
           </Link>

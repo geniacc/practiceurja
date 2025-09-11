@@ -1,43 +1,46 @@
 import React, { useState, useEffect } from "react";
-import "./CarbonSavings.css"; // ✅ MAKE SURE THIS IMPORT IS AT THE TOP
+import "./CarbonSavings.css";
 import { FaCalculator } from "react-icons/fa";
 
 export default function CarbonSavings() {
   const [distance, setDistance] = useState("");
   const [savings, setSavings] = useState(null);
-  const [totalSaved, setTotalSaved] = useState(12345.67); // Example starting point
+  const [totalSaved, setTotalSaved] = useState(12345.67);
 
-  // Simulate live CO₂ savings counter
   useEffect(() => {
     const interval = setInterval(() => {
-      setTotalSaved((prev) => prev + 0.013); // Simulate live growth
+      setTotalSaved((prev) => prev + 0.013);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
   const calculateSavings = () => {
-    const emissionFactor = 0.12; // kg CO₂ per km
+    const emissionFactor = 0.12;
     const result = distance ? (distance * emissionFactor).toFixed(2) : 0;
     setSavings(result);
   };
 
   return (
     <div className="carbon-savings-page">
+      <div className="aurora-bg">
+        <div className="aurora-shape shape-1"></div>
+        <div className="aurora-shape shape-2"></div>
+        <div className="aurora-shape shape-3"></div>
+      </div>
+
       <div className="carbon-savings-wrapper">
         <div className="page-header">
-            <h2>Carbon Savings & Footprint</h2>
-            <p>
-                Learn how electric mobility reduces environmental impact and how much CO₂ you can help save.
-            </p>
+          <h2>Carbon Savings & Footprint</h2>
+          <p>
+            Learn how electric mobility reduces environmental impact and how much CO₂ you can help save.
+          </p>
         </div>
 
-        {/* Live Company-Wide Carbon Savings Counter */}
         <div className="live-counter">
           🌱 <strong>Urja Mobility has saved</strong>{" "}
           <span className="highlight">{totalSaved.toFixed(2)} kg</span> of CO₂ emissions so far!
         </div>
 
-        {/* Personal Carbon Savings Calculator */}
         <div className="calculator-box">
           <h3>Calculate Your Personal CO₂ Savings</h3>
           <div className="calculator-controls">
@@ -47,8 +50,7 @@ export default function CarbonSavings() {
               onChange={(e) => setDistance(e.target.value)}
               placeholder="Enter daily kilometers driven"
             />
-            {/* Changed className for theme consistency */}
-            <button className="button-primary" onClick={calculateSavings}>
+            <button className="apply-btn" onClick={calculateSavings}>
               <FaCalculator /> Calculate
             </button>
           </div>
@@ -60,7 +62,6 @@ export default function CarbonSavings() {
           )}
         </div>
 
-        {/* Informational Content */}
         <div className="info-section">
           <h3>🌍 What is a Carbon Footprint?</h3>
           <p>

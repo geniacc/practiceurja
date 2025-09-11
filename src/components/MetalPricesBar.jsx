@@ -1,28 +1,78 @@
-import React from "react";
-import "./MetalPricesBar.css"; // ✅ MAKE SURE THIS IMPORT IS AT THE TOP
+import React, { useState, useEffect } from "react";
+import "./MetalPricesBar.css";
 
-const metals = [
-  { name: "Iron", price: 110.5 },
-  { name: "Copper", price: 8500.75 },
-  { name: "Lithium", price: 67350.0 },
-  { name: "Cobalt", price: 31950.0 },
-  { name: "Nickel", price: 18500.0 },
+const initialMetals = [
+  { name: "Gold", apiKey: "gold" },
+  { name: "Silver", apiKey: "silver" },
+  { name: "Platinum", apiKey: "platinum" },
+  { name: "Palladium", apiKey: "palladium" },
+  { name: "Copper", apiKey: "copper" },
+  { name: "Nickel", apiKey: "nickel" },
 ];
 
 const MetalPricesBar = () => {
-  // ✅ The 'metals' array is duplicated to create a seamless, infinite scroll effect.
-  const extendedMetals = [...metals, ...metals];
+  const [prices, setPrices] = useState({});
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch(
+          "https://api.metals.dev/v1/latest?api_key=HT5TW6MPYM1FCPTKXGRC676TKXGRC&currency=USD&unit=toz"
+        );
+        const data = await response.json();
+
+        const newPrices = {};
+        initialMetals.forEach((metal) => {
+          if (data.metals && data.metals[metal.apiKey]) {
+            newPrices[metal.name] = data.metals[metal.apiKey];
+          }
+        });
+        setPrices(newPrices);
+      } catch (error) {
+        console.error("Error fetching metal prices:", error);
+      }
+    };
+
+    fetchPrices();
+
+    // Auto update prices every 5 minutes (300000 milliseconds)
+    const interval = setInterval(fetchPrices, 300000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Duplicate metals array for seamless scrolling effect
+  const extendedMetals = [...initialMetals, ...initialMetals];
+
+  // Conversion constants
+  const perTonInTroyOunce = 32150.7; // 1 metric ton = 32150.7 troy ounces
+  const usdToInr = 83; // USD to INR conversion rate
 
   return (
     <section className="metal-prices-section">
       <div className="ticker-wrapper">
         <div className="ticker">
-          {extendedMetals.map((metal, index) => (
-            <div key={index} className="ticker-item">
-              <strong>{metal.name}</strong>: <span className="price">₹{(metal.price * 83).toLocaleString("en-IN")}</span>
-              <span className="unit"> per ton</span>
-            </div>
-          ))}
+          {extendedMetals.map((metal, index) => {
+            const pricePerToz = prices[metal.name];
+            const pricePerTonInInr = pricePerToz
+              ? pricePerToz * perTonInTroyOunce * usdToInr
+              : null;
+
+            return (
+              <div key={index} className="ticker-item">
+                <strong>{metal.name}</strong>:{" "}
+                <span className="price">
+                  ₹
+                  {pricePerTonInInr
+                    ? pricePerTonInInr.toLocaleString("en-IN", {
+                        maximumFractionDigits: 2,
+                      })
+                    : "..."}
+                </span>
+                <span className="unit"> per ton</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

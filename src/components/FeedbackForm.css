@@ -1,163 +1,186 @@
-/* --- Animation Keyframes --- */
-@keyframes aurora-pan {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- Main Page Wrapper --- */
-.feedback-wrapper {
-  /* Design System Variables */
-  --primary-glow: rgba(245, 124, 0, 0.5);
-  --primary-color: #F57C00;
-  --text-primary: #f5f5f5;
-  --text-secondary: #aab4c8;
-  --card-bg: rgba(22, 22, 34, 0.6);
-  --card-border: rgba(255, 255, 255, 0.15);
-  --card-shadow: rgba(0, 0, 0, 0.2);
-
+.feedback-section {
+  position: relative;
+  padding: 4rem 1rem;
+  background: transparent;
   min-height: 100vh;
-  padding: 40px 20px;
+  color: #333;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-in;
+  z-index: 0;
+}
+
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.17;
+  animation: aurora-float 22s ease-in-out infinite alternate;
+}
+.shape-1 {
+  width: 380px;
+  height: 380px;
+  top: -100px;
+  left: -150px;
+  background-color: #ffc107;
+}
+.shape-2 {
+  width: 320px;
+  height: 320px;
+  top: 34%;
+  right: -85px;
+  background-color: #ff8c00;
+  animation-delay: 3s;
+}
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  left: 15%;
+  background-color: #ffdab9;
+  animation-delay: 6s;
+}
+@keyframes aurora-float {
+  0% { transform: translate(0,0);}
+  50% { transform: translate(40px,60px);}
+  100% {transform: translate(0,0);}
+}
+
+.feedback-wrapper {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Applying the Aurora Background */
-  background: linear-gradient(125deg, #020024, #1d1d42, #5a2a53, #b45f4a);
-  background-size: 400% 400%;
-  animation: aurora-pan 20s ease infinite alternate;
+  min-height: 100vh;
 }
 
-/* --- Glassmorphism Form Card --- */
-.feedback-card {
+/* Card style matches contact section glassmorphism */
+.feedback-card,
+.submission-success-card {
   width: 100%;
   max-width: 550px;
-  background: var(--card-bg);
+  background: rgba(255,255,255,0.42);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
+  border: 1px solid rgba(255,140,0,0.15);
   border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
   padding: 40px;
-  box-shadow: 0 8px 32px 0 var(--card-shadow);
   text-align: center;
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.8s ease-in;
 }
 
 .feedback-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #ff8c00;
+  margin-bottom: 0.5rem;
 }
 
 .feedback-subtitle {
-  color: var(--text-secondary);
+  color: #555;
   font-size: 1.1rem;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
 }
 
-/* --- Floating Label Form Fields --- */
+/* Floating label fields -- unified with contact */
 .form-group {
   position: relative;
   margin-bottom: 30px;
 }
-
 .feedback-form input,
 .feedback-form textarea {
   width: 100%;
   padding: 15px 10px 10px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--card-border);
-  color: var(--text-primary);
+  border-bottom: 2px solid #e0e0e0;
+  color: #333;
   font-size: 1.1rem;
   outline: none;
-  transition: border-color 0.3s ease;
+  border-radius: 0;
   resize: vertical;
+  box-sizing: border-box;
 }
 
 .form-group label {
   position: absolute;
   top: 15px;
   left: 10px;
-  color: var(--text-secondary);
+  color: #999;
+  font-size: 1rem;
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.28s ease;
 }
 
-.form-group input:focus + label,
-.form-group input:not(:placeholder-shown) + label,
-.form-group textarea:focus + label,
-.form-group textarea:not(:placeholder-shown) + label {
+.feedback-form input:focus + label,
+.feedback-form input:not(:placeholder-shown) + label,
+.feedback-form textarea:focus + label,
+.feedback-form textarea:not(:placeholder-shown) + label {
   top: -10px;
   left: 5px;
-  font-size: 0.8rem;
-  color: var(--primary-color);
+  font-size: 0.82rem;
+  color: #ff8c00;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  border-bottom-color: var(--primary-color);
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-bottom-color: #ff8c00;
+  background-color: #fffaf3;
 }
 
-/* --- Unified Button Style --- */
 .button-primary {
-  width: 100%;
-  padding: 16px 32px;
-  background: var(--primary-color);
-  color: white;
+  background: #ff8c00;
+  color: #fff;
   border: none;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 16px 32px;
+  border-radius: 25px;
+  font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--primary-glow);
-  margin-top: 20px;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 124, 0, 0.2);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 .button-primary:hover {
+  background: #e67600;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 6px 20px var(--primary-glow);
 }
 
-/* --- Submission Success Message --- */
-.submission-success-card {
-  text-align: center;
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  padding: 50px;
-  box-shadow: 0 8px 32px 0 var(--card-shadow);
-  animation: fadeInUp 0.6s ease-out;
-  max-width: 550px;
-  width: 100%;
-}
+/* Success message styling matches card */
 .submission-success-card h3 {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
+  font-size: 2rem;
+  color: #ff8c00;
+  margin-bottom: 15px;
 }
 .submission-success-card p {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    line-height: 1.7;
+  color: #333;
+  font-size: 1.1rem;
+  line-height: 1.7;
 }
 
-/* --- Responsive --- */
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Responsive */
 @media (max-width: 600px) {
-    .feedback-card {
-        padding: 30px 25px;
-    }
-    .feedback-title {
-        font-size: 1.8rem;
-    }
+  .feedback-card,
+  .submission-success-card {
+    padding: 24px 12px;
+  }
+  .feedback-title {
+    font-size: 1.8rem;
+  }
 }

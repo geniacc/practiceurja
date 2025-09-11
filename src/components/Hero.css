@@ -32,10 +32,36 @@
   text-align: center;
   max-width: 800px;
   padding: 20px;
-  animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* ✨ Refined Heading: Smaller and sleeker for a more professional look */
+/* Initial state: hidden for animation */
+.hero-content h1,
+.hero-content h1 span,
+.hero-content p {
+  opacity: 0;
+}
+
+/* Drop-in animation keyframes with opacity held at 1 */
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(15px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animate h1 with slower animation, fill mode forwards */
 .hero-content h1 {
   font-size: 3.8rem;
   margin-bottom: 1rem;
@@ -44,13 +70,20 @@
   letter-spacing: -1.5px;
   color: var(--text-primary);
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: dropIn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0s;
 }
 
+/* Animate span inside h1 */
 .hero-content h1 span {
   color: var(--primary-color);
   text-shadow: 0 0 15px var(--primary-glow);
+  animation: dropIn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.7s;
+  display: inline-block; /* Needed for animation */
 }
 
+/* Animate paragraph */
 .hero-content p {
   font-size: 1.25rem;
   color: var(--text-secondary);
@@ -59,21 +92,22 @@
   margin-left: auto;
   margin-right: auto;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: dropIn 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.2s;
 }
 
 /* ✨ Refined Button: Smaller padding and font-size */
-/* Note: This style will apply to all .button-primary instances on your site. */
 .button-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 28px; /* Smaller padding */
+  padding: 14px 28px;
   background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 0.95rem; /* Slightly smaller font */
+  font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -85,16 +119,10 @@
   box-shadow: 0 6px 25px var(--primary-glow);
 }
 
-/* --- Animation --- */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .hero-content h1 {
-    font-size: 2.5rem; /* Adjusted for new base size */
+    font-size: 2.5rem;
   }
   .hero-content p {
     font-size: 1.1rem;

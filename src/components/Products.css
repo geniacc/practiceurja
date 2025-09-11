@@ -458,3 +458,666 @@
     padding: 1.5rem;
   }
 }
+/* --- UPDATED SLIDER STYLES --- */
+
+/* Widen the container to fit multiple cards */
+.product-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px; /* Increased width */
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* Add a small gap between cards using the parent */
+  gap: 15px; 
+}
+
+/* THIS IS THE KEY CHANGE. 
+  We use calc() to set the width for 3 items and account for the gap.
+*/
+.slide-item {
+  flex: 0 0 calc((100% / 3) - 10px); /* Show 3 items, adjusting for the gap */
+  box-sizing: border-box;
+  /* Padding is removed as we now use gap */
+}
+
+.slide-item .flip-card {
+  width: 100%;
+  margin: 0;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 45px; /* Slightly larger */
+  height: 45px;
+  font-size: 26px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.slider-arrow:hover {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-arrow {
+  left: -25px;
+}
+
+.right-arrow {
+  right: -25px;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS (VERY IMPORTANT!) --- */
+
+/* For Tablets: Show 2 items */
+@media (max-width: 992px) {
+  .product-slider-container {
+    max-width: 700px; /* Adjust width for 2 cards */
+  }
+  .slide-item {
+    flex: 0 0 calc((100% / 2) - 8px); /* Show 2 items */
+  }
+  .left-arrow {
+    left: -20px;
+  }
+  .right-arrow {
+    right: -20px;
+  }
+}
+
+/* For Mobile Phones: Show 1 item */
+@media (max-width: 600px) {
+  .product-slider-container {
+    max-width: 350px; /* Adjust width for 1 card */
+  }
+  .slide-item {
+    flex: 0 0 100%; /* Show 1 item */
+    /* No gap calculation needed for a single item */
+  }
+  .slider-track {
+    gap: 0;
+  }
+  .left-arrow {
+    left: 5px;
+    width: 40px;
+    height: 40px;
+  }
+  .right-arrow {
+    right: 5px;
+    width: 40px;
+    height: 40px;
+  }
+}
+/* --- Keyframes for Animations --- */
+@keyframes aurora-float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Aurora Background Styles --- */
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: aurora-float 20s ease-in-out infinite alternate;
+}
+.shape-1 { width: 400px; height: 400px; top: 10%; left: -150px; background-color: #ffc107; }
+.shape-2 { width: 350px; height: 350px; top: 40%; right: -100px; background-color: #ff8c00; animation-delay: 4s; }
+.shape-3 { width: 300px; height: 300px; bottom: 5%; left: 20%; background-color: #ffdab9; animation-delay: 8s; }
+
+
+/* --- Main Section Wrapper --- */
+.products-section {
+  padding: 60px 20px;
+  background: transparent;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Content Wrapper --- */
+.products-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: transparent;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.battery-banner {
+  width: 140px;
+  margin: 10px auto 30px;
+  display: block;
+}
+
+.products-wrapper h2 {
+  font-size: 32px;
+  color: #ff8c00;
+  margin-bottom: 40px;
+}
+
+/* --- Product Intro --- */
+.product-intro {
+  margin: 0 auto 60px;
+  padding: 30px;
+  background: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ... Unchanged Intro and Feature List styles ... */
+
+
+/* --- ✅ STYLE UPGRADE: ENHANCED HOVER --- */
+.flip-card {
+  width: 260px;
+  height: 360px;
+  perspective: 1000px;
+  cursor: pointer;
+  
+  /* Upgraded hover styles */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 15px; /* Softer, modern corners */
+}
+
+.flip-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ... Unchanged flip-card content and button styles ... */
+
+
+/* --- UPDATED SLIDER STYLES --- */
+.product-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 15px; 
+}
+
+/* --- ✅ STYLE UPGRADE: FOCUS EFFECT --- */
+.slide-item {
+  flex: 0 0 calc((100% / 3) - 10px);
+  box-sizing: border-box;
+  
+  /* Side items are scaled down and faded */
+  transform: scale(0.9);
+  opacity: 0.6;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide-item.active-center {
+  /* The center item pops */
+  transform: scale(1);
+  opacity: 1;
+}
+
+.slide-item .flip-card {
+  width: 100%;
+  margin: 0;
+}
+
+/* --- ✅ STYLE UPGRADE: Translucent Orangish Arrows --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  
+  /* New orangish and translucent style */
+  background-color: rgba(255, 140, 0, 0.6); /* Translucent orange */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle light border */
+  color: white; /* White arrow icon */
+  
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+.slider-arrow:hover {
+  background-color: rgba(255, 140, 0, 0.9); /* More opaque on hover */
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4); /* Orange glow */
+  transform: translateY(-50%) scale(1.1); /* Pop effect */
+}
+
+.left-arrow {
+  left: -25px;
+}
+
+.right-arrow {
+  right: -25px;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  .product-slider-container {
+    max-width: 700px;
+  }
+  .slide-item {
+    flex: 0 0 calc((100% / 2) - 8px);
+  }
+  .left-arrow {
+    left: -20px;
+  }
+  .right-arrow {
+    right: -20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-slider-container {
+    max-width: 350px;
+  }
+  .slide-item {
+    flex: 0 0 100%;
+    /* On mobile, disable focus effect as only one card is visible */
+    transform: scale(1);
+    opacity: 1;
+  }
+  .slider-track {
+    gap: 0;
+  }
+  .left-arrow {
+    left: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .right-arrow {
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
+/* --- Keyframes for Animations --- */
+@keyframes aurora-float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Aurora Background Styles --- */
+.aurora-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.aurora-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  animation: aurora-float 20s ease-in-out infinite alternate;
+}
+.shape-1 { width: 400px; height: 400px; top: 10%; left: -150px; background-color: #ffc107; }
+.shape-2 { width: 350px; height: 350px; top: 40%; right: -100px; background-color: #ff8c00; animation-delay: 4s; }
+.shape-3 { width: 300px; height: 300px; bottom: 5%; left: 20%; background-color: #ffdab9; animation-delay: 8s; }
+
+
+/* --- Main Section Wrapper --- */
+.products-section {
+  padding: 60px 20px;
+  background: transparent;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Content Wrapper --- */
+.products-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background-color: transparent;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.battery-banner {
+  width: 140px;
+  margin: 10px auto 30px;
+  display: block;
+}
+
+.products-wrapper h2 {
+  font-size: 32px;
+  color: #ff8c00;
+  margin-bottom: 40px;
+}
+
+/* --- Product Intro --- */
+.product-intro {
+  margin: 0 auto 60px;
+  padding: 30px;
+  background: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ... Unchanged Intro and Feature List styles ... */
+
+
+/* --- STYLE UPGRADE: ENHANCED HOVER --- */
+.flip-card {
+  width: 260px;
+  height: 360px;
+  perspective: 1000px;
+  cursor: pointer;
+  
+  /* Upgraded hover styles */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 15px; /* Softer, modern corners */
+}
+
+.flip-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.18);
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ... Unchanged flip-card content and button styles ... */
+
+
+/* --- UPDATED SLIDER STYLES --- */
+.product-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 15px; 
+}
+
+/* --- STYLE UPGRADE: FOCUS EFFECT --- */
+.slide-item {
+  flex: 0 0 calc((100% / 3) - 10px);
+  box-sizing: border-box;
+  
+  /* Side items are scaled down and faded */
+  transform: scale(0.9);
+  opacity: 0.6;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slide-item.active {
+  /* The visible items pop */
+  transform: scale(1);
+  opacity: 1;
+}
+
+.slide-item .flip-card {
+  width: 100%;
+  margin: 0;
+}
+
+/* --- STYLE UPGRADE: Translucent Orangish Arrows --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  
+  /* New orangish and translucent style */
+  background-color: rgba(255, 140, 0, 0.6); /* Translucent orange */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle light border */
+  color: white; /* White arrow icon */
+  
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+.slider-arrow:hover {
+  background-color: rgba(255, 140, 0, 0.9); /* More opaque on hover */
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4); /* Orange glow */
+  transform: translateY(-50%) scale(1.1); /* Pop effect */
+}
+
+/* Style for disabled buttons */
+.slider-arrow:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: translateY(-50%) scale(1);
+}
+
+.left-arrow {
+  left: -25px;
+}
+
+.right-arrow {
+  right: -25px;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  .product-slider-container {
+    max-width: 700px;
+  }
+  .slide-item {
+    flex: 0 0 calc((100% / 2) - 8px);
+  }
+  .left-arrow {
+    left: -20px;
+  }
+  .right-arrow {
+    right: -20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-slider-container {
+    max-width: 350px;
+  }
+  .slide-item {
+    flex: 0 0 100%;
+    /* On mobile, disable focus effect as only one card is visible */
+    transform: scale(1);
+    opacity: 1;
+  }
+  .slider-track {
+    gap: 0;
+  }
+  .left-arrow {
+    left: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  .right-arrow {
+    right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
