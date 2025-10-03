@@ -22,6 +22,7 @@ import RiskManagement from "./components/RiskManagement.jsx";
 import SocialMedia from "./components/SocialMedia.jsx";
 import TermsConditions from "./components/TermsConditions.jsx";
 import FranchiseForm from "./components/FranchiseForm.jsx";
+import Franchise from "./components/Franchise.jsx";
 import Association from "./components/Association.jsx";
 import CarCursor from "./components/CarCursor";
 import AnimatedCanvasBackground from "./components/AnimatedCanvasBackground";
@@ -79,6 +80,7 @@ export default function App() {
           path="/policies/terms-conditions"
           element={<TermsConditions />}
         />
+        <Route path="/franchise" element={<Franchise />} />
         <Route path="/franchise-inquiry" element={<FranchiseForm />} />
         <Route path="/association" element={<Association />} />
 

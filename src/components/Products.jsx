@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
+import { FaBolt, FaBatteryFull, FaLeaf, FaShieldAlt, FaCog, FaRocket, FaStar, FaGem, FaAtom, FaLightbulb, FaWifi, FaCloud } from "react-icons/fa";
 import "./Products.css";
 
 // Assuming images are in src/assets/
@@ -210,11 +212,82 @@ export const batteryOptions = [
 
 const makeId = (name) => name.toLowerCase().replace(/\s+/g, "-");
 
+// Floating icons for Products section
+const productsFloatingIcons = [
+  { icon: FaBolt, x: 10, y: 15, delay: 0, duration: 4, color: '#ff8c00', size: 24 },
+  { icon: FaBatteryFull, x: 85, y: 20, delay: 0.5, duration: 5, color: '#00ff88', size: 28 },
+  { icon: FaLeaf, x: 15, y: 70, delay: 1, duration: 6, color: '#88ff00', size: 22 },
+  { icon: FaShieldAlt, x: 90, y: 75, delay: 1.5, duration: 4.5, color: '#0088ff', size: 26 },
+  { icon: FaCog, x: 5, y: 45, delay: 2, duration: 7, color: '#ff4400', size: 20 },
+  { icon: FaRocket, x: 95, y: 50, delay: 2.5, duration: 5.5, color: '#ff0088', size: 30 },
+  { icon: FaStar, x: 25, y: 10, delay: 3, duration: 4, color: '#ffff00', size: 18 },
+  { icon: FaGem, x: 75, y: 85, delay: 3.5, duration: 6, color: '#8800ff', size: 24 },
+  { icon: FaAtom, x: 50, y: 5, delay: 4, duration: 8, color: '#00ffff', size: 32 },
+  { icon: FaLightbulb, x: 8, y: 85, delay: 4.5, duration: 5, color: '#ffaa00', size: 26 },
+  { icon: FaWifi, x: 92, y: 15, delay: 5, duration: 6, color: '#0066ff', size: 22 },
+  { icon: FaCloud, x: 45, y: 90, delay: 5.5, duration: 7, color: '#ff6600', size: 28 }
+];
+
 export default function Products() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // CONFIG: Number of items to show at once on desktop.
   const visibleItems = 3;
+
+  // Animation refs and states
+  const sectionRef = useRef(null);
+  const introRef = useRef(null);
+  const sliderRef = useRef(null);
+  const ctaRef = useRef(null);
+  
+  const sectionInView = useInView(sectionRef, { once: true, threshold: 0.1 });
+  const introInView = useInView(introRef, { once: true, threshold: 0.2 });
+  const sliderInView = useInView(sliderRef, { once: true, threshold: 0.1 });
+  const ctaInView = useInView(ctaRef, { once: true, threshold: 0.3 });
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 50 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut" }
+    }
+  };
+
+  const slideVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: (index) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "easeOut"
+      }
+    })
+  };
 
   // UPDATED LOGIC: Stops the slider at the beginning.
   const goToPrevious = () => {
@@ -232,139 +305,386 @@ export default function Products() {
   const canGoNext = currentIndex < batteryOptions.length - visibleItems;
 
   return (
-    <section className="products-section" id="products">
-      <div className="aurora-bg">
-        <div className="aurora-shape shape-1"></div>
-        <div className="aurora-shape shape-2"></div>
-        <div className="aurora-shape shape-3"></div>
+    <motion.section 
+      className="products-section" 
+      id="products"
+      ref={sectionRef}
+      initial="hidden"
+      animate={sectionInView ? "visible" : "hidden"}
+      variants={containerVariants}
+    >
+      {/* Products Floating Icons Background */}
+      <div className="products-floating-icons">
+        {productsFloatingIcons.map((iconData, index) => {
+          const IconComponent = iconData.icon;
+          return (
+            <motion.div
+              key={index}
+              className="products-floating-icon"
+              style={{
+                position: 'absolute',
+                left: `${iconData.x}%`,
+                top: `${iconData.y}%`,
+                color: iconData.color,
+                fontSize: `${iconData.size}px`,
+                zIndex: 1
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, 10, -10, 0],
+                rotate: [0, 360],
+                scale: [0.8, 1.3, 0.8],
+                opacity: [0.3, 0.8, 0.3]
+              }}
+              transition={{
+                duration: iconData.duration,
+                delay: iconData.delay,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <IconComponent />
+            </motion.div>
+          );
+        })}
       </div>
-      <div className="products-wrapper">
-        <h2>Our Product</h2>
-        <img src={batteryImg} alt="Battery" className="battery-banner" />
 
-        <div className="product-intro">
-          <h2 className="product-title">Our Product</h2>
-          <h3 className="intro-heading">
+      {/* Products Particle Effects */}
+      <div className="products-particles">
+        {[...Array(25)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="products-particle"
+            style={{
+              position: 'absolute',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: '4px',
+              height: '4px',
+              background: i % 3 === 0 ? '#ff8c00' : i % 3 === 1 ? '#00ff88' : '#0088ff',
+              borderRadius: '50%',
+              zIndex: 1
+            }}
+            animate={{
+              y: [0, -60, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 2, 0]
+            }}
+            transition={{
+              duration: 5 + Math.random() * 4,
+              delay: Math.random() * 5,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </div>
+      <div className="aurora-bg">
+        <motion.div 
+          className="aurora-shape shape-1"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <motion.div 
+          className="aurora-shape shape-2"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [360, 180, 0],
+            opacity: [0.4, 0.7, 0.4]
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <motion.div 
+          className="aurora-shape shape-3"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, -180, -360],
+            opacity: [0.2, 0.5, 0.2]
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+      </div>
+      
+      <motion.div className="products-wrapper" variants={containerVariants}>
+        <motion.h2 variants={itemVariants}>Our Product</motion.h2>
+        <motion.img 
+          src={batteryImg} 
+          alt="Battery" 
+          className="battery-banner"
+          variants={itemVariants}
+          whileHover={{ 
+            scale: 1.05,
+            filter: "brightness(1.1)"
+          }}
+          transition={{ duration: 0.3 }}
+        />
+
+        <motion.div 
+          className="product-intro"
+          ref={introRef}
+          initial="hidden"
+          animate={introInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <motion.h2 className="product-title" variants={itemVariants}>
+            Our Product
+          </motion.h2>
+          <motion.h3 className="intro-heading" variants={itemVariants}>
             Advanced Battery Solutions for Electric Vehicles
-          </h3>
-          <p className="intro-description">
+          </motion.h3>
+          <motion.p className="intro-description" variants={itemVariants}>
             Experience the next generation of energy storage with our
             state-of-the-art batteries, engineered for performance,
             reliability, and smart connectivity. Designed to a range of
             electric vehicles, our batteries deliver exceptional value and
             peace of mind.
-          </p>
+          </motion.p>
 
-          <h4 className="features-heading">Key Features</h4>
-          <ul className="feature-list">
-            <li>
+          <motion.h4 className="features-heading" variants={itemVariants}>
+            Key Features
+          </motion.h4>
+          <motion.ul className="feature-list" variants={containerVariants}>
+            <motion.li variants={itemVariants}>
               <strong>Long Life Cycle:</strong> Up to 2000 charge cycles for
               extended usage and reliability.
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={itemVariants}>
               <strong>Comprehensive Warranty:</strong> Enjoy a 3-year warranty
               for worry-free usage.
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={itemVariants}>
               <strong>Certified Quality:</strong> AIS 156 quality standard
               certified and verified for maximum safety and compliance.
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={itemVariants}>
               <strong>Low Service Cost:</strong> Designed for minimal
               maintenance and reduced total cost of usage.
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={itemVariants}>
               <strong>Smart IoT Enabled:</strong> All batteries come with
               integrated IoT features for real-time monitoring, diagnostics,
               and enhanced user experience.
-            </li>
-          </ul>
-        </div>
+            </motion.li>
+          </motion.ul>
+        </motion.div>
 
-        <h2>Battery Options for Every Need</h2>
+        <motion.h2 variants={itemVariants}>
+          Battery Options for Every Need
+        </motion.h2>
 
-        <div className="product-slider-container">
-          <button
+        <motion.div 
+          className="product-slider-container"
+          ref={sliderRef}
+          initial="hidden"
+          animate={sliderInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <motion.button
             onClick={goToPrevious}
             className="slider-arrow left-arrow"
             disabled={!canGoPrev}
+            variants={itemVariants}
+            whileHover={{ 
+              scale: canGoPrev ? 1.1 : 1,
+              backgroundColor: canGoPrev ? "rgba(245, 124, 0, 0.8)" : undefined
+            }}
+            whileTap={{ scale: canGoPrev ? 0.95 : 1 }}
           >
             &#10094;
-          </button>
+          </motion.button>
 
-          <div className="slider-viewport">
-            <div
+          <motion.div className="slider-viewport" variants={itemVariants}>
+            <motion.div
               className="slider-track"
               style={{
                 transform: `translateX(-${
                   currentIndex * (100 / visibleItems)
                 }%)`,
               }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               {batteryOptions.map((battery, index) => (
-                <div
+                <motion.div
                   key={battery.name}
                   className={`slide-item ${
                     index >= currentIndex && index < currentIndex + visibleItems
                       ? "active"
                       : ""
                   }`}
+                  custom={index}
+                  variants={slideVariants}
+                  whileHover={{ y: -10 }}
                 >
-                  <div className="flip-card">
+                  <motion.div 
+                    className="flip-card"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 20px 40px rgba(245, 124, 0, 0.2)"
+                    }}
+                  >
                     <div className="flip-card-inner">
                       <div className="flip-card-front">
-                        <img src={battery.img} alt={battery.name} />
-                        <h3>{battery.name}</h3>
-                        <p>{battery.specs}</p>
-                        <div className="flip-prompt">
-                          <span className="flip-icon">↻</span>
+                        <motion.img 
+                          src={battery.img} 
+                          alt={battery.name}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        <motion.h3
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {battery.name}
+                        </motion.h3>
+                        <motion.p
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {battery.specs}
+                        </motion.p>
+                        <motion.div 
+                          className="flip-prompt"
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            opacity: [0.7, 1, 0.7]
+                          }}
+                          transition={{ 
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          <motion.span 
+                            className="flip-icon"
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ 
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          >
+                            ↻
+                          </motion.span>
                           Hover for Details
-                        </div>
+                        </motion.div>
                       </div>
 
                       <div className="flip-card-back">
-                        <h3>{battery.name}</h3>
-                        <p>{battery.desc}</p>
-                        <div className="button-group">
+                        <motion.h3
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.1 }}
+                        >
+                          {battery.name}
+                        </motion.h3>
+                        <motion.p
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {battery.desc}
+                        </motion.p>
+                        <motion.div 
+                          className="button-group"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 }}
+                        >
                           <Link to={`/products/${makeId(battery.name)}`}>
-                            <button className="btn btn-primary">
+                            <motion.button 
+                              className="btn btn-primary"
+                              whileHover={{ 
+                                scale: 1.05,
+                                boxShadow: "0 10px 20px rgba(245, 124, 0, 0.3)"
+                              }}
+                              whileTap={{ scale: 0.95 }}
+                            >
                               See More <span className="btn-icon">→</span>
-                            </button>
+                            </motion.button>
                           </Link>
-                          <a
+                          <motion.a
                             href={battery.brochure}
                             download
                             className="btn btn-secondary"
                             rel="noopener noreferrer"
+                            whileHover={{ 
+                              scale: 1.05,
+                              backgroundColor: "rgba(245, 124, 0, 0.1)"
+                            }}
+                            whileTap={{ scale: 0.95 }}
                           >
                             Download <span className="btn-icon">↓</span>
-                          </a>
-                        </div>
+                          </motion.a>
+                        </motion.div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <button
+          <motion.button
             onClick={goToNext}
             className="slider-arrow right-arrow"
             disabled={!canGoNext}
+            variants={itemVariants}
+            whileHover={{ 
+              scale: canGoNext ? 1.1 : 1,
+              backgroundColor: canGoNext ? "rgba(245, 124, 0, 0.8)" : undefined
+            }}
+            whileTap={{ scale: canGoNext ? 0.95 : 1 }}
           >
             &#10095;
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
-        <div className="leasing-cta">
-          <h3>Interested in Leasing?</h3>
-          <p>Explore our flexible leasing plans for every EV need.</p>
+        <motion.div 
+          className="leasing-cta"
+          ref={ctaRef}
+          initial="hidden"
+          animate={ctaInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <motion.h3 variants={itemVariants}>Interested in Leasing?</motion.h3>
+          <motion.p variants={itemVariants}>
+            Explore our flexible leasing plans for every EV need.
+          </motion.p>
           <Link to="/leasing">
-            <button className="leasing-button">Know More About Leasing</button>
+            <motion.button 
+              className="leasing-button"
+              variants={itemVariants}
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 15px 30px rgba(245, 124, 0, 0.4)",
+                background: "linear-gradient(135deg, #f57c00 0%, #ff9800 100%)"
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
+              Know More About Leasing
+            </motion.button>
           </Link>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }

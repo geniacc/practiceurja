@@ -81,30 +81,137 @@ html {
   padding: 40px 20px;
 }
 
-/* Reusable Primary Button Style (from your theme) */
+/* Enhanced Primary Button Style */
 .button-primary {
-  /* Assumes CSS variables are defined on a parent element */
   --primary-glow: rgba(245, 124, 0, 0.5);
   --primary-color: #F57C00;
+  --secondary-color: #FF9800;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 14px 28px;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 50px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--primary-glow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 15px var(--primary-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.button-primary:hover::before {
+  left: 100%;
 }
 
 .button-primary:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px var(--primary-glow);
+  box-shadow: 
+    0 8px 25px var(--primary-glow),
+    0 0 20px rgba(245, 124, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.button-primary:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Enhanced Secondary Button */
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #F57C00;
+  border: 2px solid #F57C00;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #F57C00, #FF9800);
+  transition: width 0.4s ease;
+  z-index: -1;
+}
+
+.button-secondary:hover::before {
+  width: 100%;
+}
+
+.button-secondary:hover {
+  color: white;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 6px 20px rgba(245, 124, 0, 0.4),
+    0 0 15px rgba(245, 124, 0, 0.2);
+  border-color: #FF9800;
+}
+
+/* Enhanced Card Borders */
+.enhanced-card {
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #F57C00, #FF9800, #00BCD4) border-box;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.enhanced-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #F57C00, #FF9800, #00BCD4);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.enhanced-card:hover::before {
+  opacity: 0.1;
+}
+
+.enhanced-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 30px rgba(245, 124, 0, 0.2),
+    0 0 20px rgba(0, 188, 212, 0.1);
 }

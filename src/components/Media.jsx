@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "./Media.css";
 import mediaImage1 from "../assets/media1.jpg";
 import mediaImage2 from "../assets/media2.jpg";
@@ -86,18 +87,63 @@ const mediaData = {
   ]
 };
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
 const Card = ({ item, isExpanded, onToggleExpand, isFeatured = false }) => {
   const text = isExpanded
     ? item.description
     : item.description.slice(0, isFeatured ? 200 : 100) + (item.description.length > (isFeatured ? 200 : 100) ? "…" : "");
 
   return (
-    <article className={`media-card ${isFeatured ? 'featured' : ''}`}>
-      <div className="media-card-image-wrapper">
+    <motion.article 
+      className={`media-card ${isFeatured ? 'featured' : ''}`}
+      variants={cardVariants}
+      whileHover={{ 
+        scale: 1.02, 
+        boxShadow: "0 20px 40px rgba(0, 255, 255, 0.1)",
+        transition: { duration: 0.3 }
+      }}
+      whileTap={{ scale: 0.98 }}
+    >
+      <motion.div 
+        className="media-card-image-wrapper"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      >
         <img src={item.image} alt={item.title} loading="lazy" />
-      </div>
-      <div className="media-card-content">
-        <h4>
+      </motion.div>
+      <motion.div className="media-card-content" variants={itemVariants}>
+        <motion.h4 variants={itemVariants}>
           {item.link ? (
             <a href={item.link} target="_blank" rel="noopener noreferrer">
               {item.title}
@@ -105,24 +151,42 @@ const Card = ({ item, isExpanded, onToggleExpand, isFeatured = false }) => {
           ) : (
             item.title
           )}
-        </h4>
-        <time>{item.date}</time>
-        <p>
+        </motion.h4>
+        <motion.time variants={itemVariants}>{item.date}</motion.time>
+        <motion.p variants={itemVariants}>
           {text}
           {item.description.length > (isFeatured ? 200 : 100) && (
-            <button className="read-more" onClick={() => onToggleExpand(item.title)}>
+            <motion.button 
+              className="read-more" 
+              onClick={() => onToggleExpand(item.title)}
+              whileHover={{ scale: 1.05, color: "#00ffff" }}
+              whileTap={{ scale: 0.95 }}
+            >
               {isExpanded ? "Show less" : "Read more"}
-            </button>
+            </motion.button>
           )}
-        </p>
-      </div>
-    </article>
+        </motion.p>
+      </motion.div>
+    </motion.article>
   );
 };
 
 export default function Media() {
   const [active, setActive] = useState("news");
   const [expandedTitle, setExpandedTitle] = useState(null);
+  
+  // Animation refs
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const tabsRef = useRef(null);
+  const layoutRef = useRef(null);
+  
+  // useInView hooks
+  const isSectionInView = useInView(sectionRef, { once: true, threshold: 0.1 });
+  const isTitleInView = useInView(titleRef, { once: true, threshold: 0.5 });
+  const isTabsInView = useInView(tabsRef, { once: true, threshold: 0.5 });
+  const isLayoutInView = useInView(layoutRef, { once: true, threshold: 0.1 });
+  
   const sections = [
     { key: "news", label: "📰 News" },
     { key: "announcements", label: "📣 Announcements" },
@@ -138,41 +202,117 @@ export default function Media() {
   const subItems = activeData.slice(1);
 
   return (
-    <section id="media" className="media-section">
+    <motion.section 
+      id="media" 
+      className="media-section"
+      ref={sectionRef}
+      initial="hidden"
+      animate={isSectionInView ? "visible" : "hidden"}
+      variants={containerVariants}
+    >
       
-      <div className="aurora-bg">
-        <div className="aurora-shape shape-1"></div>
-        <div className="aurora-shape shape-2"></div>
-        <div className="aurora-shape shape-3"></div>
-      </div>
+      <motion.div className="aurora-bg">
+        <motion.div 
+          className="aurora-shape shape-1"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <motion.div 
+          className="aurora-shape shape-2"
+          animate={{
+            rotate: [360, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <motion.div 
+          className="aurora-shape shape-3"
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+      </motion.div>
       
-      <div className="media-wrapper">
-        <h2>In the Media</h2>
-        <div className="tabs-list">
+      <motion.div 
+        className="media-wrapper"
+        variants={containerVariants}
+      >
+        <motion.h2 
+          ref={titleRef}
+          initial="hidden"
+          animate={isTitleInView ? "visible" : "hidden"}
+          variants={itemVariants}
+        >
+          In the Media
+        </motion.h2>
+        <motion.div 
+          className="tabs-list"
+          ref={tabsRef}
+          initial="hidden"
+          animate={isTabsInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
           {sections.map((sec) => (
-            <button
+            <motion.button
               key={sec.key}
               className={`tab-btn ${active === sec.key ? "active" : ""}`}
               onClick={() => { setActive(sec.key); setExpandedTitle(null); }}
+              variants={itemVariants}
+              whileHover={{ 
+                scale: 1.05, 
+                backgroundColor: "rgba(0, 255, 255, 0.1)",
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
             >
               {sec.label}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="media-layout" key={active}>
+        <motion.div 
+          className="media-layout" 
+          key={active}
+          ref={layoutRef}
+          initial="hidden"
+          animate={isLayoutInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
           {featuredItem && (
-            <div className="featured-container">
+            <motion.div 
+              className="featured-container"
+              variants={itemVariants}
+            >
               <Card item={featuredItem} isExpanded={expandedTitle === featuredItem.title} onToggleExpand={toggleExpand} isFeatured={true} />
-            </div>
+            </motion.div>
           )}
-          <div className="sub-cards-container">
+          <motion.div 
+            className="sub-cards-container"
+            variants={containerVariants}
+          >
             {subItems.map((item) => (
               <Card item={item} key={item.title} isExpanded={expandedTitle === item.title} onToggleExpand={toggleExpand} />
             ))}
-          </div>
-        </div>
-      </div>
-    </section>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }
